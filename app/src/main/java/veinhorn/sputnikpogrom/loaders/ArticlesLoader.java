@@ -24,11 +24,6 @@ public class ArticlesLoader extends AsyncTask<String, String, List<ShortArticle>
     }
 
     @Override
-    protected void onPreExecute() {
-
-    }
-
-    @Override
     protected List<ShortArticle> doInBackground(String... args) {
         try {
             return ArticlesFetcher.getArticles();

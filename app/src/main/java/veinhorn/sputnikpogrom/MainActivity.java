@@ -1,14 +1,18 @@
 package veinhorn.sputnikpogrom;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import veinhorn.sputnikpogrom.activities.ArticleActivity;
 import veinhorn.sputnikpogrom.adapters.ShortArticlesAdapter;
 import veinhorn.sputnikpogrom.entities.containers.ShortArticlesContainer;
 import veinhorn.sputnikpogrom.loaders.ArticlesLoader;
@@ -24,9 +28,20 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.inject(this);
 
-        ShortArticlesContainer shortArticlesContainer = new ShortArticlesContainer();
-        ShortArticlesAdapter shortArticlesAdapter = new ShortArticlesAdapter(this, shortArticlesContainer);
+        final ShortArticlesContainer shortArticlesContainer = new ShortArticlesContainer();
+        final ShortArticlesAdapter shortArticlesAdapter = new ShortArticlesAdapter(this, shortArticlesContainer);
         shortArticlesGridView.setAdapter(shortArticlesAdapter);
+        shortArticlesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, ArticleActivity.class);
+                String articleUrl = shortArticlesContainer.getShortArticle(position).getArticleUrl();
+                String articleTitle = shortArticlesContainer.getShortArticle(position).getTitle();
+                intent.putExtra("article_title", articleTitle);
+                intent.putExtra("article_url", articleUrl);
+                startActivity(intent);
+            }
+        });
 
         ArticlesLoader articlesLoader = new ArticlesLoader(shortArticlesAdapter, shortArticlesContainer);
         articlesLoader.execute();
