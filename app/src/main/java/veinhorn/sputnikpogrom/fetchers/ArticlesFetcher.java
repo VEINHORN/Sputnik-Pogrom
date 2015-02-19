@@ -15,11 +15,11 @@ import veinhorn.sputnikpogrom.entities.ShortArticle;
  * Created by veinhorn on 19.2.15.
  */
 public class ArticlesFetcher {
-    private static final String BASE_URL = "http://sputnikipogrom.com";
+    public static final String BASE_URL = "http://sputnikipogrom.com";
 
-    public static List<ShortArticle> getArticles() throws IOException {
+    public static List<ShortArticle> getArticles(String url) throws IOException {
         List<ShortArticle> articles = new ArrayList<>();
-        Element contentElement = Jsoup.connect(BASE_URL).get().getElementById("content");
+        Element contentElement = Jsoup.connect(url).get().getElementById("content");
         Elements articleElements = contentElement.getElementsByClass("item-inner");
         for(Element article : articleElements) {
             ShortArticle shortArticle = new ShortArticle();
@@ -29,5 +29,9 @@ public class ArticlesFetcher {
             articles.add(shortArticle);
         }
         return articles;
+    }
+
+    public static List<ShortArticle> getArticles(String url, int pageNumber) throws IOException {
+        return getArticles(url + "/" + pageNumber);
     }
 }

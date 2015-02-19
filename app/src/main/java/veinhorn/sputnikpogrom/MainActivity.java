@@ -3,12 +3,16 @@ package veinhorn.sputnikpogrom;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ListView;
+
+import java.util.logging.Logger;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -19,8 +23,8 @@ import veinhorn.sputnikpogrom.loaders.ArticlesLoader;
 
 
 public class MainActivity extends ActionBarActivity {
-    @InjectView(R.id.short_articles_list_view)
-    GridView shortArticlesGridView;
+    @InjectView(R.id.short_articles_list_view) GridView shortArticlesGridView;
+    private Integer addedToAdapterItemsCounter = 0; // contains number of added to adapter items
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +33,17 @@ public class MainActivity extends ActionBarActivity {
         ButterKnife.inject(this);
 
         final ShortArticlesContainer shortArticlesContainer = new ShortArticlesContainer();
-        final ShortArticlesAdapter shortArticlesAdapter = new ShortArticlesAdapter(this, shortArticlesContainer);
+        final ShortArticlesContainer adapterShortArticlesContainer = new ShortArticlesContainer();
+
+        final ShortArticlesAdapter shortArticlesAdapter = new ShortArticlesAdapter(this, adapterShortArticlesContainer);
         shortArticlesGridView.setAdapter(shortArticlesAdapter);
+
+
+
+        ArticlesLoader articlesLoader = new ArticlesLoader(shortArticlesAdapter, shortArticlesContainer,
+                adapterShortArticlesContainer, addedToAdapterItemsCounter, shortArticlesGridView);
+        articlesLoader.execute();
+
         shortArticlesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -42,9 +55,6 @@ public class MainActivity extends ActionBarActivity {
                 startActivity(intent);
             }
         });
-
-        ArticlesLoader articlesLoader = new ArticlesLoader(shortArticlesAdapter, shortArticlesContainer);
-        articlesLoader.execute();
     }
 
 
