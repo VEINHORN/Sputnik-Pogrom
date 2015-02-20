@@ -25,6 +25,7 @@ import veinhorn.sputnikpogrom.loaders.ArticlesLoader;
 public class MainActivity extends ActionBarActivity {
     @InjectView(R.id.short_articles_list_view) GridView shortArticlesGridView;
     private Integer addedToAdapterItemsCounter = 0; // contains number of added to adapter items
+    private Integer pageNumber = 1; // page number for Sputnik&Pogrom fetcher
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class MainActivity extends ActionBarActivity {
 
 
         ArticlesLoader articlesLoader = new ArticlesLoader(shortArticlesAdapter, shortArticlesContainer,
-                adapterShortArticlesContainer, addedToAdapterItemsCounter, shortArticlesGridView);
+                adapterShortArticlesContainer, addedToAdapterItemsCounter, shortArticlesGridView, pageNumber);
         articlesLoader.execute();
 
         shortArticlesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -34,6 +34,7 @@ public class ShortArticlesContainer {
 
     // add size elements from second container to this container
     public void addContainer(ShortArticlesContainer secondContainer, int beginPosition, int size) {
+        if(beginPosition == secondContainer.size()) return; // optimization
         for(int i = 0; i < size; i++) {
             int resultPosition = beginPosition + i;
             if(secondContainer.size() > resultPosition) shortArticles.add(secondContainer.getShortArticle(resultPosition));
