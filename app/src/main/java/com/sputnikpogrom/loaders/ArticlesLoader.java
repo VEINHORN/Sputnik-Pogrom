@@ -1,4 +1,4 @@
-package veinhorn.sputnikpogrom.loaders;
+package com.sputnikpogrom.loaders;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -9,11 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import veinhorn.sputnikpogrom.adapters.ShortArticlesAdapter;
-import veinhorn.sputnikpogrom.entities.ShortArticle;
-import veinhorn.sputnikpogrom.entities.containers.ShortArticlesContainer;
-import veinhorn.sputnikpogrom.fetchers.ArticleFetcher;
-import veinhorn.sputnikpogrom.fetchers.ArticlesFetcher;
+import com.sputnikpogrom.adapters.ShortArticlesAdapter;
+import com.sputnikpogrom.entities.ShortArticle;
+import com.sputnikpogrom.entities.containers.ShortArticlesContainer;
+import com.sputnikpogrom.fetchers.ArticlesFetcher;
 
 /**
  * Created by veinhorn on 19.2.15.

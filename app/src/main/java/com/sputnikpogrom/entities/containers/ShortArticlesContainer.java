@@ -1,9 +1,9 @@
-package veinhorn.sputnikpogrom.entities.containers;
+package com.sputnikpogrom.entities.containers;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import veinhorn.sputnikpogrom.entities.ShortArticle;
+import com.sputnikpogrom.entities.ShortArticle;
 
 /**
  * Created by veinhorn on 19.2.15.

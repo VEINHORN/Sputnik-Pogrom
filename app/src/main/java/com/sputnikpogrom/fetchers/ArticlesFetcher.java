@@ -1,7 +1,6 @@
-package veinhorn.sputnikpogrom.fetchers;
+package com.sputnikpogrom.fetchers;
 
 import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
@@ -9,7 +8,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import veinhorn.sputnikpogrom.entities.ShortArticle;
+import com.sputnikpogrom.entities.ShortArticle;
 
 /**
  * Created by veinhorn on 19.2.15.

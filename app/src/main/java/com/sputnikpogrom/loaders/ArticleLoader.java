@@ -1,11 +1,11 @@
-package veinhorn.sputnikpogrom.loaders;
+package com.sputnikpogrom.loaders;
 
 import android.os.AsyncTask;
 import android.webkit.WebView;
 
 import java.io.IOException;
 
-import veinhorn.sputnikpogrom.fetchers.ArticleFetcher;
+import com.sputnikpogrom.fetchers.ArticleFetcher;
 
 /**
  * Created by veinhorn on 19.2.15.

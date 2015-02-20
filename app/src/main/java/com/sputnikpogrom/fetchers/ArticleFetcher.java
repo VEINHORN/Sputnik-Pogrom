@@ -1,4 +1,4 @@
-package veinhorn.sputnikpogrom.fetchers;
+package com.sputnikpogrom.fetchers;
 
 import org.jsoup.Jsoup;
 

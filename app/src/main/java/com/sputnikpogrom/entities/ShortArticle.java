@@ -1,4 +1,4 @@
-package veinhorn.sputnikpogrom.entities;
+package com.sputnikpogrom.entities;
 
 /**
  * Created by veinhorn on 19.2.15.

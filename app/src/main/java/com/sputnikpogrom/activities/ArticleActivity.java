@@ -1,4 +1,4 @@
-package veinhorn.sputnikpogrom.activities;
+package com.sputnikpogrom.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -8,8 +8,7 @@ import android.webkit.WebView;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import veinhorn.sputnikpogrom.R;
-import veinhorn.sputnikpogrom.loaders.ArticleLoader;
-import veinhorn.sputnikpogrom.loaders.ArticlesLoader;
+import com.sputnikpogrom.loaders.ArticleLoader;
 
 /**
  * Created by veinhorn on 19.2.15.

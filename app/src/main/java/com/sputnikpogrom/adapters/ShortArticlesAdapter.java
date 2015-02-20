@@ -1,4 +1,4 @@
-package veinhorn.sputnikpogrom.adapters;
+package com.sputnikpogrom.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,16 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-
-import java.util.Objects;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import veinhorn.sputnikpogrom.R;
-import veinhorn.sputnikpogrom.entities.containers.ShortArticlesContainer;
+import com.sputnikpogrom.entities.containers.ShortArticlesContainer;
 
 /**
  * Created by veinhorn on 19.2.15.

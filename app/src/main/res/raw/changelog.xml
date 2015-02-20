@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog bulletedList="true">
+    <changelogversion versionName="1.03" changeDate="Oct 10,2015">
+        <changelogtext>Приложение переписано с нуля.</changelogtext>
+        <changelogtext>Добавлены постеры вместо заголовков.</changelogtext>
+        <changelogtext>Динамическая подгрузка статей(просто листайте вниз).</changelogtext>
+        <changelogtext>Значительно ускорена загрузка статей.</changelogtext>
+        <changelogtext>Добавлена возможность смотреть видео в статьях.</changelogtext>
+    </changelogversion>
+
+    <changelogversion versionName="1.02" changeDate="Oct 10,2014">
+        <changelogtext>Исправлена проблема с пропорциями изображений.</changelogtext>
+        <changelogtext>Исправлена проблема с поворотом экрана, когда статьи загружались заново.</changelogtext>
+        <changelogtext>Исправлена ошибка с вылетом на Android 4.1.2 и др.</changelogtext>
+    </changelogversion>
+
+    <changelogversion versionName="1.01" changeDate="Oct 7,2014">
+        <changelogtext>Исправлена проблема с кодировкой на Android 2.3.</changelogtext>
+        <changelogtext>Исправлена проблема с размером изображений в статьях.</changelogtext>
+        <changelogtext>Исправлены некоторые другие ошибки.</changelogtext>
+    </changelogversion>
+
+    <changelogversion versionName="1.0" changeDate="Oct 2, 2014">
+        <changelogtext>Добавлена возможность просмотра списка статей.</changelogtext>
+        <changelogtext>Добавлен зум при просмотре статей.</changelogtext>
+    </changelogversion>
+</changelog>
