@@ -4,4 +4,20 @@
     <string name="action_settings">Настройки</string>
     <string name="action_about">О приложении</string>
     <string name="activity_changelog">История версий</string>
+    <string name="fragment_home_title">Домашняя</string>
+    <string name="fragment_saved_title">Сохраненные</string>
+    <string name="nav_drawer_categories">Категории</string>
+    <string name="category_best_articles">Лучшие статьи</string>
+    <string name="category_culture">Культура</string>
+    <string name="category_economy">Экономика</string>
+    <string name="category_history">История</string>
+    <string name="category_images">Картинки</string>
+    <string name="category_important_articles">Важные статьи</string>
+    <string name="category_people">Люди</string>
+    <string name="category_policy">Политика</string>
+    <string name="category_reading">Чтение</string>
+    <string name="category_society">Общество</string>
+    <string name="category_tech">Технологии</string>
+    <string name="category_translations">Переводы</string>
+    <string name="category_videos">Видео</string>
 </resources>

@@ -27,9 +27,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        //getSupportActionBar().setDisplayShowHomeEnabled(true);
-        //getSupportActionBar().setIcon(R.drawable.ic_launcher);
+        setContentView(R.layout.fragment_home);
         ButterKnife.inject(this);
 
         final ShortArticlesContainer shortArticlesContainer = new ShortArticlesContainer();

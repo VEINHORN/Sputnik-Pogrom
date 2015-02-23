@@ -5,4 +5,29 @@
     <string name="action_about">About</string>
 
     <string name="activity_changelog">Change log</string>
+
+    <!-- Fragments string resources -->
+    <string name="fragment_home_title">Home</string>
+    <string name="fragment_saved_title">Saved</string>
+    <!-- -->
+
+    <!-- Navigation drawer string resources -->
+    <string name="nav_drawer_categories">Categories</string>
+    <string name="category_best_articles">Best articles</string>
+    <string name="category_important_articles">Important articles</string>
+    <string name="category_policy">Policy</string>
+    <string name="category_economy">Economic</string>
+    <string name="category_history">History</string>
+    <string name="category_culture">Culture</string>
+    <string name="category_society">Society</string>
+    <string name="category_people">People</string>
+    <string name="category_tech">Tech</string>
+
+    <string name="nav_drawer_another_categories">Another categories</string>
+    
+    <string name="category_translations">Translations</string>
+    <string name="category_reading">Reading</string>
+    <string name="category_images">Images</string>
+    <string name="category_videos">Videos</string>
+    <!-- -->
 </resources>
