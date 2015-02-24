@@ -24,6 +24,7 @@ public class ArticlesLoader extends AsyncTask<String, String, List<ShortArticle>
     private Integer addedToAdapterItemsCounter;
     private GridView shortArticlesGridView;
     private Integer pageNumber;
+    private String url;
 
     public ArticlesLoader(ShortArticlesAdapter shortArticlesAdapter, ShortArticlesContainer shortArticlesContainer,
                           ShortArticlesContainer adapterShortArticlesContainer, Integer addedToAdapterItemsCounter,
@@ -39,7 +40,9 @@ public class ArticlesLoader extends AsyncTask<String, String, List<ShortArticle>
     @Override
     protected List<ShortArticle> doInBackground(String... args) {
         try {
-            return ArticlesFetcher.getArticles(ArticlesFetcher.BASE_URL, pageNumber);
+            String url = args[0];
+            this.url = url;
+            return ArticlesFetcher.getArticles(url, pageNumber);
         } catch(IOException e) {
             return new ArrayList<ShortArticle>();
         }
@@ -83,7 +86,7 @@ public class ArticlesLoader extends AsyncTask<String, String, List<ShortArticle>
                         pageNumber++;
                         ArticlesLoader articlesLoader = new ArticlesLoader(shortArticlesAdapter, shortArticlesContainer,
                                 adapterShortArticlesContainer, addedToAdapterItemsCounter, shortArticlesGridView, pageNumber);
-                        articlesLoader.execute();
+                        articlesLoader.execute(url);
                     }
                 }
             });

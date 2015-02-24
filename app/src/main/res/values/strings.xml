@@ -22,9 +22,9 @@
     <string name="category_society">Society</string>
     <string name="category_people">People</string>
     <string name="category_tech">Tech</string>
+    <string name="category_science">Science</string>
 
     <string name="nav_drawer_another_categories">Another categories</string>
-    
     <string name="category_translations">Translations</string>
     <string name="category_reading">Reading</string>
     <string name="category_images">Images</string>

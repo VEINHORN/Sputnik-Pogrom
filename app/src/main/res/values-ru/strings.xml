@@ -20,4 +20,6 @@
     <string name="category_tech">Технологии</string>
     <string name="category_translations">Переводы</string>
     <string name="category_videos">Видео</string>
+    <string name="category_science">Наука</string>
+    <string name="nav_drawer_another_categories">Др. рубрики</string>
 </resources>
