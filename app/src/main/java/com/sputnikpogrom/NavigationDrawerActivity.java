@@ -74,8 +74,10 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         switch(item.getItemId()) {
             case R.id.action_settings:
                 break;
-            case R.id.action_about:
+            case R.id.action_changelog:
                 startActivity(new Intent(NavigationDrawerActivity.this, ChangeLogActivity.class));
+                break;
+            case R.id.action_about:
                 break;
         }
         return super.onOptionsItemSelected(item);

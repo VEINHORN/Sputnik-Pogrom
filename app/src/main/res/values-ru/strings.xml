@@ -22,4 +22,9 @@
     <string name="category_videos">Видео</string>
     <string name="category_science">Наука</string>
     <string name="nav_drawer_another_categories">Др. рубрики</string>
+    <string name="action_changelog">История версий</string>
+    <string name="no_internet_connection">Отсутствует соединение с интернетом</string>
+    <string name="no">Нет</string>
+    <string name="no_internet_connection_message">Вы хотите открыть сохраненные статьи?</string>
+    <string name="yes">Да</string>
 </resources>

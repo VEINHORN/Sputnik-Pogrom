@@ -12,9 +12,11 @@ import android.widget.GridView;
 
 import com.sputnikpogrom.activities.ArticleActivity;
 import com.sputnikpogrom.adapters.ShortArticlesAdapter;
+import com.sputnikpogrom.utils.DialogsUtil;
 import com.sputnikpogrom.entities.containers.ShortArticlesContainer;
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
 import com.sputnikpogrom.loaders.ArticlesLoader;
+import com.sputnikpogrom.utils.NetworkUtil;
 
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -32,32 +34,36 @@ public class HomeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        ButterKnife.inject(this, view);
-
         final Activity activity = getActivity();
-        final ShortArticlesContainer shortArticlesContainer = new ShortArticlesContainer();
-        final ShortArticlesContainer adapterShortArticlesContainer = new ShortArticlesContainer();
+        if(NetworkUtil.isNetworkAvailable(activity)) {
+            View view = inflater.inflate(R.layout.fragment_home, container, false);
+            ButterKnife.inject(this, view);
 
-        final ShortArticlesAdapter shortArticlesAdapter = new ShortArticlesAdapter(activity, adapterShortArticlesContainer);
-        shortArticlesGridView.setAdapter(shortArticlesAdapter);
+            final ShortArticlesContainer shortArticlesContainer = new ShortArticlesContainer();
+            final ShortArticlesContainer adapterShortArticlesContainer = new ShortArticlesContainer();
 
-        ArticlesLoader articlesLoader = new ArticlesLoader(shortArticlesAdapter, shortArticlesContainer,
-                adapterShortArticlesContainer, addedToAdapterItemsCounter, shortArticlesGridView, pageNumber);
-        articlesLoader.execute(ArticlesFetcher.BASE_URL);
+            final ShortArticlesAdapter shortArticlesAdapter = new ShortArticlesAdapter(activity, adapterShortArticlesContainer);
+            shortArticlesGridView.setAdapter(shortArticlesAdapter);
 
-        shortArticlesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(activity, ArticleActivity.class);
-                String articleUrl = shortArticlesContainer.getShortArticle(position).getArticleUrl();
-                String articleTitle = shortArticlesContainer.getShortArticle(position).getTitle();
-                intent.putExtra("article_title", articleTitle);
-                intent.putExtra("article_url", articleUrl);
-                startActivity(intent);
-            }
-        });
+            ArticlesLoader articlesLoader = new ArticlesLoader(shortArticlesAdapter, shortArticlesContainer,
+                    adapterShortArticlesContainer, addedToAdapterItemsCounter, shortArticlesGridView, pageNumber);
+            articlesLoader.execute(ArticlesFetcher.BASE_URL);
 
-        return view;
+            shortArticlesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Intent intent = new Intent(activity, ArticleActivity.class);
+                    String articleUrl = shortArticlesContainer.getShortArticle(position).getArticleUrl();
+                    String articleTitle = shortArticlesContainer.getShortArticle(position).getTitle();
+                    intent.putExtra("article_title", articleTitle);
+                    intent.putExtra("article_url", articleUrl);
+                    startActivity(intent);
+                }
+            });
+            return view;
+        } else {
+            DialogsUtil.showNoInternetConnectionDialog(activity);
+            return inflater.inflate(R.layout.fragment_home, container, false);
+        }
     }
 }
