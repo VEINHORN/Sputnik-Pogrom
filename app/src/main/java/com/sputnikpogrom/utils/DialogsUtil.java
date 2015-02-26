@@ -29,4 +29,13 @@ public class DialogsUtil {
                 })
                 .show();
     }
+
+    public static MaterialDialog showNoSdCardDialog(final Context context) {
+        return new MaterialDialog.Builder(context)
+                .title("Cannot save article")
+                .content("You don't have SD card.")
+                .positiveText("OK")
+                .positiveColor(Color.GRAY)
+                .show();
+    }
 }
