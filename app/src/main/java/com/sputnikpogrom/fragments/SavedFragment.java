@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.sputnikpogrom.ArticleSaver;
@@ -20,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -32,7 +34,7 @@ public class SavedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Activity activity = getActivity();
         if(FilesUtil.isExternalStorageWritable()) {
-            ArticleSaver.saveArticle();
+            //ArticleSaver.saveArticle();
         } else {
             DialogsUtil.showNoSdCardDialog(activity);
         }
