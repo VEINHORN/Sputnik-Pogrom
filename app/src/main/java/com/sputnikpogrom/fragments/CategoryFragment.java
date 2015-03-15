@@ -54,8 +54,10 @@ public class CategoryFragment extends Fragment {
                     Intent intent = new Intent(activity, ArticleActivity.class);
                     String articleUrl = shortArticlesContainer.getShortArticle(position).getArticleUrl();
                     String articleTitle = shortArticlesContainer.getShortArticle(position).getTitle();
+                    String posterUrl = shortArticlesContainer.getShortArticle(position).getPosterUrl();
                     intent.putExtra("article_title", articleTitle);
                     intent.putExtra("article_url", articleUrl);
+                    intent.putExtra("poster_url", posterUrl);
                     startActivity(intent);
                 }
             });

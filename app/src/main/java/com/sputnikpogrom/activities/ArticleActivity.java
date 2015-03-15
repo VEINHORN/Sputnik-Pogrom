@@ -11,13 +11,20 @@ import android.widget.Toast;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import veinhorn.sputnikpogrom.R;
+
+import com.sputnikpogrom.ArticleSaver;
+import com.sputnikpogrom.database.ArticleDbHelper;
+import com.sputnikpogrom.entities.ShortArticle;
 import com.sputnikpogrom.loaders.ArticleLoader;
+
+import java.util.List;
 
 /**
  * Created by veinhorn on 19.2.15.
  */
 public class ArticleActivity extends ActionBarActivity {
     @InjectView(R.id.article_webview) WebView articleWebView;
+    private ShortArticle article;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +32,10 @@ public class ArticleActivity extends ActionBarActivity {
         setContentView(R.layout.activity_article);
         ButterKnife.inject(this);
         String articleTitle = getIntent().getStringExtra("article_title");
-        getSupportActionBar().setTitle(articleTitle);
         String articleUrl = getIntent().getStringExtra("article_url");
+        String posterUrl = getIntent().getStringExtra("poster_url");
+        article = new ShortArticle(articleTitle, articleUrl, posterUrl);
+        getSupportActionBar().setTitle(articleTitle);
         ArticleLoader articlesLoader = new ArticleLoader(articleUrl, articleWebView);
         articlesLoader.execute();
     }
@@ -47,7 +56,12 @@ public class ArticleActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_save_article:
-                Toast.makeText(this, "Test", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(this, "Test", Toast.LENGTH_SHORT).show();
+                //ArticleDbHelper articleDbHelper = new ArticleDbHelper(this);
+                //articleDbHelper.deleteArticle("test art");
+                //List<ShortArticle> articles = articleDbHelper.getAllArticles();
+                //int t = 0;
+                new ArticleSaver(article).execute();
                 break;
         }
         return super.onOptionsItemSelected(item);

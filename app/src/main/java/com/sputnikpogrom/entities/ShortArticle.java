@@ -8,6 +8,14 @@ public class ShortArticle {
     private String posterUrl;
     private String articleUrl;
 
+    public ShortArticle() {}
+
+    public ShortArticle(String title, String posterUrl, String articleUrl) {
+        this.title = title;
+        this.posterUrl = posterUrl;
+        this.articleUrl = articleUrl;
+    }
+
     public String getPosterUrl() {
         return posterUrl;
     }
