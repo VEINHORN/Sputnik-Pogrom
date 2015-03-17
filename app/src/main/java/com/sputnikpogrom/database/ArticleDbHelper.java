@@ -44,7 +44,7 @@ public class ArticleDbHelper extends SQLiteOpenHelper {
         onUpgrade(db, oldVersion, newVersion);
     }
 
-    public void addArticle(ShortArticle article) {
+    public void saveArticle(ShortArticle article) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(ArticleContract.ArticleEntry.COLUMN_NAME_TITLE, article.getTitle());
@@ -80,5 +80,16 @@ public class ArticleDbHelper extends SQLiteOpenHelper {
         String selection = ArticleContract.ArticleEntry.COLUMN_NAME_TITLE + " LIKE ?";
         String[] selectionArgs = { article };
         db.delete(ArticleContract.ArticleEntry.TABLE_NAME, selection, selectionArgs);
+    }
+
+    public boolean isSuchArticle(String articleName) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(ArticleContract.ArticleEntry.TABLE_NAME,
+                new String[] { ArticleContract.ArticleEntry.COLUMN_NAME_TITLE },
+                new String(ArticleContract.ArticleEntry.COLUMN_NAME_TITLE + " = ?"),
+                new String[] { articleName }, null, null, null, null);
+        int t = 0;
+        if(cursor.getCount() > 0) return true;
+        return false;
     }
 }

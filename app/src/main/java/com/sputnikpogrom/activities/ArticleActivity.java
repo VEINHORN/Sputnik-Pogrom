@@ -56,12 +56,7 @@ public class ArticleActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_save_article:
-                //Toast.makeText(this, "Test", Toast.LENGTH_SHORT).show();
-                //ArticleDbHelper articleDbHelper = new ArticleDbHelper(this);
-                //articleDbHelper.deleteArticle("test art");
-                //List<ShortArticle> articles = articleDbHelper.getAllArticles();
-                //int t = 0;
-                new ArticleSaver(article).execute();
+                new ArticleSaver(this, article).execute();
                 break;
         }
         return super.onOptionsItemSelected(item);

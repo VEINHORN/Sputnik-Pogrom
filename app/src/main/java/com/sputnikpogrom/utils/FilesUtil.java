@@ -8,6 +8,6 @@ import android.os.Environment;
 public class FilesUtil {
     public static boolean isExternalStorageWritable() {
         if(Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) return true;
-        else return false;
+        return false;
     }
 }

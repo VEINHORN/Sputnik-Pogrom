@@ -10,10 +10,10 @@ public class ShortArticle {
 
     public ShortArticle() {}
 
-    public ShortArticle(String title, String posterUrl, String articleUrl) {
+    public ShortArticle(String title, String articleUrl, String posterUrl) {
         this.title = title;
-        this.posterUrl = posterUrl;
         this.articleUrl = articleUrl;
+        this.posterUrl = posterUrl;
     }
 
     public String getPosterUrl() {
