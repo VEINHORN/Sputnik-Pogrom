@@ -1,4 +1,4 @@
-package com.sputnikpogrom;
+package com.sputnikpogrom.logic;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -9,7 +9,7 @@ import android.widget.Toast;
 import com.sputnikpogrom.database.ArticleDbHelper;
 import com.sputnikpogrom.entities.ShortArticle;
 import com.sputnikpogrom.fetchers.ArticleFetcher;
-import com.sputnikpogrom.fetchers.ArticlesFetcher;
+import com.sputnikpogrom.utils.FilesUtil;
 import com.sputnikpogrom.utils.MD5Util;
 
 import java.io.BufferedWriter;
@@ -21,9 +21,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.util.List;
 
 /**
  * Created by veinhorn on 26.2.15.
@@ -55,8 +52,6 @@ public class ArticleSaver extends AsyncTask<String, String, Boolean> {
 
     private boolean saveArticle() {
         ArticleDbHelper articleDbHelper = new ArticleDbHelper(context);
-        List<ShortArticle> articles = articleDbHelper.getAllArticles();
-        boolean flag = articleDbHelper.isSuchArticle("test");
         if(!articleDbHelper.isSuchArticle(article.getTitle())) {
             articleDbHelper.saveArticle(article);
             savePoster();
@@ -81,7 +76,6 @@ public class ArticleSaver extends AsyncTask<String, String, Boolean> {
     }
 
     private void savePoster() {
-        File targetFolder = getTargetFolder();
         InputStream inputStream = null;
         OutputStream outputStream = null;
         HttpURLConnection connection = null;
@@ -98,7 +92,7 @@ public class ArticleSaver extends AsyncTask<String, String, Boolean> {
 
             inputStream = connection.getInputStream();
             String posterFileName = MD5Util.md5Hex(article.getArticleUrl()) + POSTER;
-            outputStream = new FileOutputStream(new File(targetFolder, "/" + posterFileName));
+            outputStream = new FileOutputStream(new File(getTargetFolder(), "/" + posterFileName));
 
             byte data[] = new byte[4096];
             int count;
@@ -120,7 +114,17 @@ public class ArticleSaver extends AsyncTask<String, String, Boolean> {
         }
     }
 
-    private File getTargetFolder() {
+    private static File getTargetFolder() {
         return new File(Environment.getExternalStorageDirectory(), SPUTNIK_FOLDER);
+    }
+
+    public static File getPoster(ShortArticle article) {
+        String posterFileName = MD5Util.md5Hex(article.getArticleUrl()) + POSTER;
+        return new File(getTargetFolder(), "/" + posterFileName);
+    }
+
+    public static String getArticleHtml(ShortArticle article) {
+        String htmlFileName = MD5Util.md5Hex(article.getArticleUrl()) + HTML;
+        return FilesUtil.getTextFromFile(new File(getTargetFolder(), "/" + htmlFileName));
     }
 }

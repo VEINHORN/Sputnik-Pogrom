@@ -1,25 +1,22 @@
 package com.sputnikpogrom.activities;
 
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 
+import com.sputnikpogrom.logic.ArticleSaver;
+import com.sputnikpogrom.entities.ShortArticle;
+import com.sputnikpogrom.loaders.SavedArticleLoader;
+
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import veinhorn.sputnikpogrom.R;
 
-import com.sputnikpogrom.logic.ArticleSaver;
-import com.sputnikpogrom.entities.ShortArticle;
-import com.sputnikpogrom.loaders.ArticleLoader;
-
-/**
- * Created by veinhorn on 19.2.15.
- */
-public class ArticleActivity extends ActionBarActivity {
-    @InjectView(R.id.article_webview) WebView articleWebView;
+public class SavedArticleActivity extends ActionBarActivity {
+    @InjectView(R.id.article_webview) WebView savedArticleWebView;
     private ShortArticle article;
 
     @Override
@@ -32,13 +29,16 @@ public class ArticleActivity extends ActionBarActivity {
         String posterUrl = getIntent().getStringExtra("poster_url");
         article = new ShortArticle(articleTitle, articleUrl, posterUrl);
         getSupportActionBar().setTitle(articleTitle);
-        ArticleLoader articlesLoader = new ArticleLoader(articleUrl, articleWebView);
-        articlesLoader.execute();
+        //ArticleLoader articlesLoader = new ArticleLoader(articleUrl, articleWebView);
+        //articlesLoader.execute();
+        SavedArticleLoader savedArticlesLoader = new SavedArticleLoader(article, savedArticleWebView);
+        savedArticlesLoader.execute();
     }
+
 
     @Override
     protected void onDestroy() {
-        articleWebView.setVisibility(View.GONE); // bug with zoom buttons without this line, still doesn't work
+        savedArticleWebView.setVisibility(View.GONE); // bug with zoom buttons without this line, still doesn't work
         super.onDestroy();
     }
 

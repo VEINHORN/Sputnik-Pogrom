@@ -82,6 +82,11 @@ public class ArticleDbHelper extends SQLiteOpenHelper {
         db.delete(ArticleContract.ArticleEntry.TABLE_NAME, selection, selectionArgs);
     }
 
+    public void deleteAllArticles() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.delete(ArticleContract.ArticleEntry.TABLE_NAME, null, null);
+    }
+
     public boolean isSuchArticle(String articleName) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.query(ArticleContract.ArticleEntry.TABLE_NAME,
