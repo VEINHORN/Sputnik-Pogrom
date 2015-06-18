@@ -43,6 +43,7 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         addSection(newSection(getString(R.string.category_images), getFragment(ArticlesFetcher.IMAGES)));
         addSection(newSection(getString(R.string.category_videos), getFragment(ArticlesFetcher.VIDEOS)));
 
+        disableLearningPattern();
         allowArrowAnimation();
     }
 
