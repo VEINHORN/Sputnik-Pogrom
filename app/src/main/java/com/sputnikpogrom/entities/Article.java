@@ -1,19 +1,19 @@
 package com.sputnikpogrom.entities;
 
 /**
- * Created by veinhorn on 19.2.15.
+ * Created by veinhorn on 2.7.15.
  */
-public class ShortArticle {
+public class Article {
     private String title;
     private String posterUrl;
     private String articleUrl;
 
-    public ShortArticle() {}
+    public String getTitle() {
+        return title;
+    }
 
-    public ShortArticle(String title, String articleUrl, String posterUrl) {
+    public void setTitle(String title) {
         this.title = title;
-        this.articleUrl = articleUrl;
-        this.posterUrl = posterUrl;
     }
 
     public String getPosterUrl() {
@@ -30,13 +30,5 @@ public class ShortArticle {
 
     public void setArticleUrl(String articleUrl) {
         this.articleUrl = articleUrl;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 }

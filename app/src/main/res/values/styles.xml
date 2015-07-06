@@ -4,7 +4,7 @@
         <!-- Customize your theme here. -->
     </style>
     
-    <style name="NavigationDrawerTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
+    <style name="NavigationDrawerTheme" parent="MaterialNavigationDrawerTheme">
         <item name="drawerType">@integer/DRAWERTYPE_NO_HEADER</item>
         <item name="colorPrimary">#8bc34a</item>
         <item name="colorPrimaryDark">#558b2f</item>
