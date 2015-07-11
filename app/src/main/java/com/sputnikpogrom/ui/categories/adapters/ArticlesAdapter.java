@@ -19,8 +19,9 @@ import veinhorn.sputnikpogrom.R;
  */
 public class ArticlesAdapter extends BaseAdapter {
     private Context context;
-    private LayoutInflater layoutInflater;
     private ArticlesContainer articles;
+    private LayoutInflater layoutInflater;
+
 
     static class ViewHolder {
         @InjectView(R.id.article_poster) ImageView poster;
@@ -30,14 +31,9 @@ public class ArticlesAdapter extends BaseAdapter {
         }
     }
 
-    public ArticlesAdapter(Context context) {
+    public ArticlesAdapter(Context context, ArticlesContainer articles) {
         this.context = context;
-        articles = new ArticlesContainer();
-        Article article = new Article();
-        article.setArticleUrl("sdfds");
-        article.setPosterUrl("sdfsd");
-        article.setTitle("sdfdsf");
-        articles.addArticle(article);
+        this.articles = articles;
         layoutInflater = LayoutInflater.from(context);
     }
 

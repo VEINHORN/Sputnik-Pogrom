@@ -17,10 +17,12 @@ import java.util.List;
  */
 public class ArticlesLoader extends AsyncTask<String, Integer, ArticlesContainer> {
     private Context context;
+    private ArticlesContainer articles;
     private ArticlesAdapter articlesAdapter;
 
-    public ArticlesLoader(Context context, ArticlesAdapter articlesAdapter) {
+    public ArticlesLoader(Context context, ArticlesContainer articles, ArticlesAdapter articlesAdapter) {
         this.context = context;
+        this.articles = articles;
         this.articlesAdapter = articlesAdapter;
     }
 
@@ -40,8 +42,8 @@ public class ArticlesLoader extends AsyncTask<String, Integer, ArticlesContainer
         if(articles == null) {
             DialogsUtil.showCannotLoadArticlesDialog(context);
         } else {
-            //articlesAdapter = new ArticlesAdapter(context, articles);
-            //articlesAdapter.notifyDataSetChanged();
+            this.articles.addArticles(articles);
+            articlesAdapter.notifyDataSetChanged();
         }
     }
 }

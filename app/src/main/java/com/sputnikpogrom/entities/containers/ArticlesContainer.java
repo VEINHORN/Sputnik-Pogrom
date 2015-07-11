@@ -15,13 +15,17 @@ public class ArticlesContainer {
         articles = new ArrayList<>();
     }
 
-    public ArticlesContainer(List<Article> articlesList) {
-        articles = new ArrayList<>();
-        for(Article article : articlesList) articles.add(article);
+    public ArticlesContainer(List<Article> articles) {
+        this.articles = new ArrayList<>();
+        for(Article article : articles) this.articles.add(article);
     }
 
     public void addArticle(Article article) {
         articles.add(article);
+    }
+
+    public void addArticles(ArticlesContainer articles) {
+        this.articles.addAll(articles.getArticles());
     }
 
     public Article getArticle(int position) {
@@ -30,5 +34,9 @@ public class ArticlesContainer {
 
     public int getSize() {
         return articles.size();
+    }
+
+    public List<Article> getArticles() {
+        return articles;
     }
 }

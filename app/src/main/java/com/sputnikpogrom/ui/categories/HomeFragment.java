@@ -25,9 +25,9 @@ import veinhorn.sputnikpogrom.R;
 public class HomeFragment extends Fragment {
     @InjectView(R.id.articles_gridview) GridView articlesGridView;
 
-    private ArticlesLoader articlesLoader;
+    private ArticlesContainer articles;
     private ArticlesAdapter articlesAdapter;
-
+    private ArticlesLoader articlesLoader;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,10 +36,11 @@ public class HomeFragment extends Fragment {
 
         if(NetworkUtil.isNetworkAvailable(activity)) {
             ButterKnife.inject(this, view);
-            articlesAdapter = new ArticlesAdapter(activity);
+            articles = new ArticlesContainer();
+            articlesAdapter = new ArticlesAdapter(activity, articles);
             articlesGridView.setAdapter(articlesAdapter);
 
-            articlesLoader = new ArticlesLoader(activity, articlesAdapter);
+            articlesLoader = new ArticlesLoader(activity, articles, articlesAdapter);
             articlesLoader.execute();
             return view;
         } else {
