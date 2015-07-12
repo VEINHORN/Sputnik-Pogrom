@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.sputnikpogrom.entities.Article;
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
+import com.squareup.picasso.Picasso;
 
+import butterknife.Bind;
 import butterknife.ButterKnife;
-import butterknife.InjectView;
 import veinhorn.sputnikpogrom.R;
 
 /**
@@ -22,12 +22,11 @@ public class ArticlesAdapter extends BaseAdapter {
     private ArticlesContainer articles;
     private LayoutInflater layoutInflater;
 
-
     static class ViewHolder {
-        @InjectView(R.id.article_poster) ImageView poster;
+        @Bind(R.id.article_poster) ImageView poster;
 
         public ViewHolder(View view) {
-            ButterKnife.inject(this, view);
+            ButterKnife.bind(this, view);
         }
     }
 
@@ -48,9 +47,7 @@ public class ArticlesAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder)convertView.getTag();
         }
-
-        viewHolder.poster.setImageDrawable(context.getResources().getDrawable(R.drawable.testimage));
-
+        Picasso.with(context).load(articles.getArticle(position).getPosterUrl()).into(viewHolder.poster);
         return convertView;
     }
 

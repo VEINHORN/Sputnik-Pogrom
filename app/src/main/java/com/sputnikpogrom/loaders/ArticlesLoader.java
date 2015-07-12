@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Created by veinhorn on 2.7.15.
  */
-public class ArticlesLoader extends AsyncTask<String, Integer, ArticlesContainer> {
+public class ArticlesLoader extends AsyncTask<Integer, Integer, ArticlesContainer> {
     private Context context;
     private ArticlesContainer articles;
     private ArticlesAdapter articlesAdapter;
@@ -27,10 +27,10 @@ public class ArticlesLoader extends AsyncTask<String, Integer, ArticlesContainer
     }
 
     @Override
-    protected ArticlesContainer doInBackground(String... params) {
+    protected ArticlesContainer doInBackground(Integer... params) {
         List<Article> articles = null;
         try {
-            articles = ArticlesFetcher.fetchArticles(ArticlesFetcher.HOME, 2);
+            articles = ArticlesFetcher.fetchArticles(ArticlesFetcher.HOME, params[0]);
         } catch(IOException e) {
             articles = null;
         }
