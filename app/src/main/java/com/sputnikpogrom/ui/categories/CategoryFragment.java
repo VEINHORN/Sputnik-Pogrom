@@ -25,7 +25,7 @@ import veinhorn.sputnikpogrom.R;
 /**
  * Created by veinhorn on 1.7.15.
  */
-public class HomeFragment extends Fragment {
+public class CategoryFragment extends Fragment {
     @Bind(R.id.articles_gridview) GridView articlesGridView;
 
     private ArticlesContainer articles;

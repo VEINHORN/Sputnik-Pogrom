@@ -1,11 +1,9 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-    </style>
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar"></style>
     
-    <style name="NavigationDrawerTheme" parent="MaterialNavigationDrawerTheme">
-        <item name="drawerType">@integer/DRAWERTYPE_NO_HEADER</item>
+    <style name="NavigationDrawerTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
+        <item name="drawerType">@integer/DRAWERTYPE_IMAGE</item>
         <item name="colorPrimary">#8bc34a</item>
         <item name="colorPrimaryDark">#558b2f</item>
         <item name="colorAccent">#FFFFFF</item>

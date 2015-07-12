@@ -2,7 +2,7 @@ package com.sputnikpogrom.ui;
 
 import android.os.Bundle;
 
-import com.sputnikpogrom.ui.categories.HomeFragment;
+import com.sputnikpogrom.ui.categories.CategoryFragment;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import veinhorn.sputnikpogrom.R;
@@ -14,7 +14,8 @@ import veinhorn.sputnikpogrom.R;
 public class NavigationDrawerActivity extends MaterialNavigationDrawer {
     @Override
     public void init(Bundle savedInstanceState) {
-        addSection(newSection(getString(R.string.fragment_home_title), new HomeFragment()));
+        setDrawerHeaderImage(R.drawable.nav_drawer_header);
+        addSection(newSection(getString(R.string.fragment_home_title), new CategoryFragment()));
 
         disableLearningPattern();
         allowArrowAnimation();
