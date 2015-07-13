@@ -39,8 +39,5 @@
     <string name="category_reading">Reading</string>
     <string name="category_images">Images</string>
     <string name="category_videos">Videos</string>
-    <string name="title_activity_saved_article">SavedArticleActivity</string>
-
-    <string name="hello_world">Hello world!</string>
     <!-- -->
 </resources>

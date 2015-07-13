@@ -4,8 +4,6 @@
     
     <style name="NavigationDrawerTheme" parent="MaterialNavigationDrawerTheme.Light.DarkActionBar">
         <item name="drawerType">@integer/DRAWERTYPE_IMAGE</item>
-        <item name="colorPrimary">#8bc34a</item>
-        <item name="colorPrimaryDark">#558b2f</item>
-        <item name="colorAccent">#FFFFFF</item>
+        <item name="colorPrimary">#333333</item>
     </style>
 </resources>
