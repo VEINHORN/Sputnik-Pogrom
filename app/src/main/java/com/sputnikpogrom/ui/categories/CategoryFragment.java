@@ -31,6 +31,7 @@ public class CategoryFragment extends Fragment {
     private ArticlesContainer articles;
     private ArticlesAdapter articlesAdapter;
     private PageNumberHolder pageNumberHolder;
+    private int categoryType;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -43,8 +44,9 @@ public class CategoryFragment extends Fragment {
             articlesAdapter = new ArticlesAdapter(activity, articles);
             articlesGridView.setAdapter(articlesAdapter);
             pageNumberHolder = new PageNumberHolder();
+            categoryType = getArguments().getInt("categoryType");
 
-            new ArticlesLoader(activity, articles, articlesAdapter).execute(pageNumberHolder.getPageNumber());
+            new ArticlesLoader(activity, articles, articlesAdapter).execute(categoryType, pageNumberHolder.getPageNumber());
             pageNumberHolder.increment();
 
             articlesGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -67,7 +69,7 @@ public class CategoryFragment extends Fragment {
                         Log.d("Visible item count: ", Integer.toString(visibleItemCount));
                         Log.d("Total item count: ", Integer.toString(totalItemCount));
 
-                        new ArticlesLoader(activity, articles, articlesAdapter).execute(pageNumberHolder.getPageNumber());
+                        new ArticlesLoader(activity, articles, articlesAdapter).execute(categoryType, pageNumberHolder.getPageNumber());
                         pageNumberHolder.increment();
                     }
                 }

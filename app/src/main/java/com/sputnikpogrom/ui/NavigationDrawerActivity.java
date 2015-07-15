@@ -1,6 +1,7 @@
 package com.sputnikpogrom.ui;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
 import com.sputnikpogrom.ui.categories.CategoryFragment;
@@ -17,7 +18,7 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
     public void init(Bundle savedInstanceState) {
         setDrawerHeaderImage(R.drawable.nav_drawer_header);
 
-        addSection(newSection(getString(R.string.fragment_home_title), new CategoryFragment()));
+        addSection(newSection(getString(R.string.fragment_home_title), getFragment(ArticlesFetcher.HOME)));
 
         addSubheader(getString(R.string.nav_drawer_categories));
         addSection(newSection(getString(R.string.category_best_articles), getFragment(ArticlesFetcher.BEST)));
@@ -39,5 +40,18 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
 
         disableLearningPattern();
         allowArrowAnimation();
+    }
+
+    private Fragment getFragment(int categoryType) {
+        Fragment fragment = new CategoryFragment();
+        Bundle bundle = new Bundle();
+        fragment.setArguments(getBundle(categoryType));
+        return fragment;
+    }
+
+    private Bundle getBundle(int categoryType) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("categoryType", categoryType);
+        return bundle;
     }
 }

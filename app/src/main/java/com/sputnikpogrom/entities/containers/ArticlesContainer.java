@@ -39,4 +39,8 @@ public class ArticlesContainer {
     public List<Article> getArticles() {
         return articles;
     }
+
+    public boolean isEmpty() {
+        return articles.isEmpty();
+    }
 }
