@@ -3,15 +3,12 @@ package com.sputnikpogrom.loaders;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-
 import com.sputnikpogrom.entities.Article;
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
 import com.sputnikpogrom.ui.categories.adapters.ArticlesAdapter;
 import com.sputnikpogrom.utils.DialogsUtil;
-
 import org.jsoup.HttpStatusException;
-
 import java.io.IOException;
 import java.util.List;
 import static com.sputnikpogrom.fetchers.ArticlesFetcher.NOT_FOUND;
@@ -39,7 +36,7 @@ public class ArticlesLoader extends AsyncTask<Integer, Integer, ArticlesContaine
         } catch(HttpStatusException e) {
             if(e.getStatusCode() == NOT_FOUND) return new ArticlesContainer();
         } catch(IOException e) {
-            articles = null;
+            Log.e(getClass().getName(), e.getMessage());
         }
         return articles == null ? null : new ArticlesContainer(articles);
     }
@@ -53,7 +50,7 @@ public class ArticlesLoader extends AsyncTask<Integer, Integer, ArticlesContaine
                 this.articles.addArticles(articles);
                 articlesAdapter.notifyDataSetChanged();
             } else {
-                Log.i(this.getClass().getName(), "Requested page wasn't found.");
+                Log.i(getClass().getName(), "Requested page wasn't found.");
             }
         }
     }

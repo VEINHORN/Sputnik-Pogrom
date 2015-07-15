@@ -9,11 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
+import android.widget.AdapterView;
 import android.widget.GridView;
-
+import com.sputnikpogrom.entities.Article;
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.sputnikpogrom.holders.PageNumberHolder;
 import com.sputnikpogrom.loaders.ArticlesLoader;
+import com.sputnikpogrom.ui.NavigationDrawerActivity;
+import com.sputnikpogrom.ui.article.ArticleFragment;
 import com.sputnikpogrom.ui.categories.adapters.ArticlesAdapter;
 import com.sputnikpogrom.utils.DialogsUtil;
 import com.sputnikpogrom.utils.NetworkUtil;
@@ -36,7 +39,7 @@ public class CategoryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final Activity activity = getActivity();
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_category, container, false);
 
         if(NetworkUtil.isNetworkAvailable(activity)) {
             ButterKnife.bind(this, view);
@@ -48,6 +51,18 @@ public class CategoryFragment extends Fragment {
 
             new ArticlesLoader(activity, articles, articlesAdapter).execute(categoryType, pageNumberHolder.getPageNumber());
             pageNumberHolder.increment();
+
+            articlesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Fragment articleFragment = new ArticleFragment();
+                    Bundle bundle = new Bundle();
+                    Article article = articles.getArticle(position);
+                    bundle.putString("articleUrl", article.getArticleUrl());
+                    articleFragment.setArguments(bundle);
+                    ((NavigationDrawerActivity) activity).setFragmentChild(articleFragment, article.getTitle());
+                }
+            });
 
             articlesGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
                 private int firstVisibleItem;
