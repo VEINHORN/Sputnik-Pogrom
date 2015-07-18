@@ -29,10 +29,10 @@ public class ArticleFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_article, container, false);
         ButterKnife.bind(this, view);
 
+        new ArticleLoader(activity, articleWebView).execute(getArguments().getString("articleUrl"));
+
         AdRequest adRequest = new AdRequest.Builder().build();
         adView.loadAd(adRequest);
-
-        new ArticleLoader(activity, articleWebView).execute(getArguments().getString("articleUrl"));
         return view;
     }
 }
