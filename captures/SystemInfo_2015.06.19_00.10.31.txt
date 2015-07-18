@@ -76,11 +76,11 @@ Total memory usage:
 
 Profile data in ms:
 
-	com.sputnikpogrom/com.sputnikpogrom.NavigationDrawerActivity/android.view.ViewRootImpl@1f48bd3a (visibility=8)
+	com.sputnikpogrom/com.sputnikpogrom.ui.NavigationDrawerActivity/android.view.ViewRootImpl@1f48bd3a (visibility=8)
 	com.sputnikpogrom/com.sputnikpogrom.activities.SavedArticleActivity/android.view.ViewRootImpl@107c6deb (visibility=0)
 View hierarchy:
 
-  com.sputnikpogrom/com.sputnikpogrom.NavigationDrawerActivity/android.view.ViewRootImpl@1f48bd3a
+  com.sputnikpogrom/com.sputnikpogrom.ui.NavigationDrawerActivity/android.view.ViewRootImpl@1f48bd3a
   98 views, 96.60 kB of display lists
 
   com.sputnikpogrom/com.sputnikpogrom.activities.SavedArticleActivity/android.view.ViewRootImpl@107c6deb

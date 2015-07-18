@@ -39,8 +39,7 @@
     <string name="category_reading">Reading</string>
     <string name="category_images">Images</string>
     <string name="category_videos">Videos</string>
-    <string name="title_activity_saved_article">SavedArticleActivity</string>
-
-    <string name="hello_world">Hello world!</string>
     <!-- -->
+
+    <string name="adsId">ca-app-pub-4471993256799343/5710032513</string>
 </resources>

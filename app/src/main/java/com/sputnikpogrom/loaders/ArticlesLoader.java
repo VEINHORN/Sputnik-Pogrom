@@ -1,95 +1,57 @@
 package com.sputnikpogrom.loaders;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.AbsListView;
-import android.widget.GridView;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.sputnikpogrom.adapters.ShortArticlesAdapter;
-import com.sputnikpogrom.entities.ShortArticle;
-import com.sputnikpogrom.entities.containers.ShortArticlesContainer;
+import com.sputnikpogrom.entities.Article;
+import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
+import com.sputnikpogrom.ui.categories.adapters.ArticlesAdapter;
+import com.sputnikpogrom.utils.DialogsUtil;
+import org.jsoup.HttpStatusException;
+import java.io.IOException;
+import java.util.List;
+import static com.sputnikpogrom.fetchers.ArticlesFetcher.NOT_FOUND;
 
 /**
- * Created by veinhorn on 19.2.15.
+ * Created by veinhorn on 2.7.15.
  */
-public class ArticlesLoader extends AsyncTask<String, String, List<ShortArticle>> {
-    private ShortArticlesAdapter shortArticlesAdapter;
-    private ShortArticlesContainer shortArticlesContainer;
-    private ShortArticlesContainer adapterShortArticlesContainer;
-    private Integer addedToAdapterItemsCounter;
-    private GridView shortArticlesGridView;
-    private Integer pageNumber;
-    private String url;
+public class ArticlesLoader extends AsyncTask<Integer, Integer, ArticlesContainer> {
+    private Context context;
+    private ArticlesContainer articles;
+    private ArticlesAdapter articlesAdapter;
 
-    public ArticlesLoader(ShortArticlesAdapter shortArticlesAdapter, ShortArticlesContainer shortArticlesContainer,
-                          ShortArticlesContainer adapterShortArticlesContainer, Integer addedToAdapterItemsCounter,
-                          GridView shortArticlesGridView, Integer pageNumber) {
-        this.shortArticlesAdapter = shortArticlesAdapter;
-        this.shortArticlesContainer = shortArticlesContainer;
-        this.adapterShortArticlesContainer = adapterShortArticlesContainer;
-        this.addedToAdapterItemsCounter = addedToAdapterItemsCounter;
-        this.shortArticlesGridView = shortArticlesGridView;
-        this.pageNumber = pageNumber;
+    public ArticlesLoader(Context context, ArticlesContainer articles, ArticlesAdapter articlesAdapter) {
+        this.context = context;
+        this.articles = articles;
+        this.articlesAdapter = articlesAdapter;
     }
 
     @Override
-    protected List<ShortArticle> doInBackground(String... args) {
+    protected ArticlesContainer doInBackground(Integer... params) {
+        Integer categoryType = params[0], pageNumber = params[1];
+        List<Article> articles = null;
         try {
-            String url = args[0];
-            this.url = url;
-            return ArticlesFetcher.getArticles(url, pageNumber);
+            articles = ArticlesFetcher.fetchArticles(categoryType, pageNumber);
+        } catch(HttpStatusException e) {
+            if(e.getStatusCode() == NOT_FOUND) return new ArticlesContainer();
         } catch(IOException e) {
-            return new ArrayList<ShortArticle>();
+            Log.e(getClass().getName(), e.getMessage());
         }
+        return articles == null ? null : new ArticlesContainer(articles);
     }
 
     @Override
-    protected void onPostExecute(List<ShortArticle> shortArticles) {
-        shortArticlesContainer.addAllShortArticles(shortArticles);
-
-        adapterShortArticlesContainer.addContainer(shortArticlesContainer, addedToAdapterItemsCounter, ShortArticlesContainer.SIZE);
-        addedToAdapterItemsCounter = adapterShortArticlesContainer.size();
-
-        shortArticlesAdapter.notifyDataSetChanged();
-        if(pageNumber == 1) { // add scroll listener only first time, when we try to fetch first page from site
-            // add here listener because was bug when added seamless first 5 articles
-            shortArticlesGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
-                private int firstVisibleItem;
-                private int visibleItemCount;
-                private int totalItemCount;
-
-                @Override
-                public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-                    this.firstVisibleItem = firstVisibleItem;
-                    this.visibleItemCount = visibleItemCount;
-                    this.totalItemCount = totalItemCount;
-                }
-
-                @Override
-                public void onScrollStateChanged(AbsListView view, int scrollState) {
-                    // bottom gridview event handling
-                    if(scrollState == SCROLL_STATE_IDLE && firstVisibleItem + visibleItemCount == totalItemCount) {
-                        adapterShortArticlesContainer.addContainer(shortArticlesContainer, addedToAdapterItemsCounter, ShortArticlesContainer.SIZE);
-                        addedToAdapterItemsCounter = adapterShortArticlesContainer.size();
-                        shortArticlesAdapter.notifyDataSetChanged();
-                        Log.d("End of the list.", "End of the list.");
-                        Log.d("First visible item: ", Integer.toString(firstVisibleItem));
-                        Log.d("Total item count: ", Integer.toString(totalItemCount));
-                        Log.d("Added to adapter: ", Integer.toString(addedToAdapterItemsCounter));
-                    }
-                    if(addedToAdapterItemsCounter == shortArticlesContainer.size()) {
-                        pageNumber++;
-                        ArticlesLoader articlesLoader = new ArticlesLoader(shortArticlesAdapter, shortArticlesContainer,
-                                adapterShortArticlesContainer, addedToAdapterItemsCounter, shortArticlesGridView, pageNumber);
-                        articlesLoader.execute(url);
-                    }
-                }
-            });
+    protected void onPostExecute(ArticlesContainer articles) {
+        if(articles == null) {
+            DialogsUtil.showCannotLoadArticlesDialog(context);
+        } else {
+            if(!articles.isEmpty()) {
+                this.articles.addArticles(articles);
+                articlesAdapter.notifyDataSetChanged();
+            } else {
+                Log.i(getClass().getName(), "Requested page wasn't found.");
+            }
         }
     }
 }

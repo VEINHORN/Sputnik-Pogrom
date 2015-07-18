@@ -1,49 +1,60 @@
 package com.sputnikpogrom.loaders;
 
+import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+
+import com.sputnikpogrom.fetchers.ArticleFetcher;
+import com.sputnikpogrom.utils.DialogsUtil;
 
 import java.io.IOException;
 
-import com.sputnikpogrom.fetchers.ArticleFetcher;
-
 /**
- * Created by veinhorn on 19.2.15.
+ * Created by veinhorn on 16.7.15.
  */
-public class ArticleLoader extends AsyncTask<String, String, String> {
+public class ArticleLoader extends AsyncTask<String, Void, String> {
     private static final String MIME_TYPE = "text/html";
     private static final String ENCODING = "utf-8";
 
-    private String articleUrl;
+    private Context context;
     private WebView articleWebView;
 
-    public ArticleLoader(String articleUrl, WebView articleWebView) {
-        this.articleUrl = articleUrl;
+    public ArticleLoader(Context context, WebView articleWebView) {
+        this.context = context;
         this.articleWebView = articleWebView;
     }
+
     @Override
-    protected String doInBackground(String... args) {
+    protected String doInBackground(String... urls) {
+        String articleHtml = null;
         try {
-            return ArticleFetcher.getArticle(articleUrl);
+            articleHtml = ArticleFetcher.fetchArticle(urls[0]);
         } catch(IOException e) {
-            return "";
+            Log.e(getClass().getName(), e.getMessage());
         }
+        return articleHtml;
     }
 
     @Override
     protected void onPostExecute(String articleHtml) {
-        String start = "<html><head><style>img { width: 100%; height: auto; };</style></head><body>";
-        String end = "</body></html>";
+        if(articleHtml != null) {
+            String start = "<html><head><style>img { width: 100%; height: auto; };</style></head><body>";
+            String end = "</body></html>";
 
-        StringBuilder resultArticleHtml = new StringBuilder();
-        resultArticleHtml.append(start);
-        resultArticleHtml.append(articleHtml);
-        resultArticleHtml.append(end);
+            StringBuilder builder = new StringBuilder();
+            builder.append(start);
+            builder.append(articleHtml);
+            builder.append(end);
 
-        articleWebView.getSettings().setDefaultTextEncodingName(ENCODING);
-        articleWebView.getSettings().setBuiltInZoomControls(true);
-        articleWebView.getSettings().setJavaScriptEnabled(true);
-
-        articleWebView.loadDataWithBaseURL(null, resultArticleHtml.toString(), MIME_TYPE, ENCODING, null);
+            WebSettings settings = articleWebView.getSettings();
+            settings.setDefaultTextEncodingName(ENCODING);
+            settings.setSupportZoom(true);
+            settings.setJavaScriptEnabled(true);
+            articleWebView.loadDataWithBaseURL(null, builder.toString(), MIME_TYPE, ENCODING, null);
+        } else {
+            DialogsUtil.showCannotLoadArticleDialog(context);
+        }
     }
 }

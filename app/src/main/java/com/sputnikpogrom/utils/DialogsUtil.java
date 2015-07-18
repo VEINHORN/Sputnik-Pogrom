@@ -38,4 +38,22 @@ public class DialogsUtil {
                 .positiveColor(Color.GRAY)
                 .show();
     }
+
+    public static MaterialDialog showCannotLoadArticlesDialog(Context context) {
+        return new MaterialDialog.Builder(context)
+                .title("Cannot load articles")
+                .content("Cannot load articles. Check your internet connection or try again.")
+                .positiveText("OK")
+                .positiveColor(Color.GRAY)
+                .show();
+    }
+
+    public static MaterialDialog showCannotLoadArticleDialog(Context context) {
+        return new MaterialDialog.Builder(context)
+                .title("Cannot load article")
+                .content("Cannot load article. Check your internet connection or try again.")
+                .positiveText("OK")
+                .positiveColor(Color.GRAY)
+                .show();
+    }
 }
