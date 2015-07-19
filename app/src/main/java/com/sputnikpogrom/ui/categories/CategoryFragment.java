@@ -10,7 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.GridView;
+import android.widget.ListView;
+
 import com.sputnikpogrom.entities.Article;
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.sputnikpogrom.holders.PageNumberHolder;
@@ -29,7 +30,7 @@ import veinhorn.sputnikpogrom.R;
  * Created by veinhorn on 1.7.15.
  */
 public class CategoryFragment extends Fragment {
-    @Bind(R.id.articles_gridview) GridView articlesGridView;
+    @Bind(R.id.articles_listview) ListView articlesListView;
 
     private ArticlesContainer articles;
     private ArticlesAdapter articlesAdapter;
@@ -45,14 +46,14 @@ public class CategoryFragment extends Fragment {
             ButterKnife.bind(this, view);
             articles = new ArticlesContainer();
             articlesAdapter = new ArticlesAdapter(activity, articles);
-            articlesGridView.setAdapter(articlesAdapter);
+            articlesListView.setAdapter(articlesAdapter);
             pageNumberHolder = new PageNumberHolder();
             categoryType = getArguments().getInt("categoryType");
 
             new ArticlesLoader(activity, articles, articlesAdapter).execute(categoryType, pageNumberHolder.getPageNumber());
             pageNumberHolder.increment();
 
-            articlesGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            articlesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     Fragment articleFragment = new ArticleFragment();
@@ -64,7 +65,7 @@ public class CategoryFragment extends Fragment {
                 }
             });
 
-            articlesGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            articlesListView.setOnScrollListener(new AbsListView.OnScrollListener() {
                 private int firstVisibleItem;
                 private int visibleItemCount;
                 private int totalItemCount;

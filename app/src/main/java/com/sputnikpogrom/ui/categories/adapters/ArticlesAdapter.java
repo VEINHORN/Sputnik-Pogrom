@@ -1,14 +1,24 @@
 package com.sputnikpogrom.ui.categories.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.util.HashSet;
+import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -18,9 +28,11 @@ import veinhorn.sputnikpogrom.R;
  * Created by veinhorn on 5.7.15.
  */
 public class ArticlesAdapter extends BaseAdapter {
+    private WindowManager windowManager;
     private Context context;
     private ArticlesContainer articles;
     private LayoutInflater layoutInflater;
+    private Set<Target> targets;
 
     static class ViewHolder {
         @Bind(R.id.article_poster) ImageView poster;
@@ -31,14 +43,16 @@ public class ArticlesAdapter extends BaseAdapter {
     }
 
     public ArticlesAdapter(Context context, ArticlesContainer articles) {
+        windowManager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
         this.context = context;
         this.articles = articles;
         layoutInflater = LayoutInflater.from(context);
+        targets = new HashSet<>();
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHolder viewHolder;
+    public View getView(int position, View convertView, final ViewGroup parent) {
+        final ViewHolder viewHolder;
 
         if(convertView == null) {
             convertView = layoutInflater.inflate(R.layout.article_item, null);
@@ -47,7 +61,36 @@ public class ArticlesAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder)convertView.getTag();
         }
-        Picasso.with(context).load(articles.getArticle(position).getPosterUrl()).into(viewHolder.poster);
+
+        final Target target = new Target() {
+            @Override
+            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                viewHolder.poster.setMinimumWidth(bitmap.getWidth());
+                viewHolder.poster.setMinimumHeight(bitmap.getHeight());
+
+                Point point = new Point();
+                Display display = windowManager.getDefaultDisplay();
+                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+                    display.getSize(point);
+                } else {
+                    point.set(display.getWidth(), display.getHeight());
+                }
+                if(point.x == 480 || point.x == 540) {
+                    parent.setPadding(20, 0, 20, 0);
+                    viewHolder.poster.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                }
+
+                viewHolder.poster.setImageBitmap(bitmap);
+                targets.remove(this);
+            }
+
+            @Override public void onBitmapFailed(Drawable errorDrawable) {}
+
+            @Override public void onPrepareLoad(Drawable placeHolderDrawable) {}
+        };
+
+        targets.add(target);
+        Picasso.with(context).load(articles.getArticle(position).getPosterUrl()).into(target);
         return convertView;
     }
 

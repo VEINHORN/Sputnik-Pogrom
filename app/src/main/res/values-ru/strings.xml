@@ -28,4 +28,5 @@
     <string name="no_internet_connection_message">Вы хотите открыть сохраненные статьи?</string>
     <string name="yes">Да</string>
     <string name="action_save_article">Сохранить статью</string>
+    <string name="adsId">ca-app-pub-4471993256799343/5710032513</string>
 </resources>

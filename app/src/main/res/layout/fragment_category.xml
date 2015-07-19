@@ -5,11 +5,10 @@
     android:layout_height="match_parent"
     android:background="@color/fragment_category_background"
     tools:context=".MainActivity">
-    <GridView
-        android:numColumns="1"
-        android:verticalSpacing="20dp"
-        android:stretchMode="columnWidth"
-        android:id="@+id/articles_gridview"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"/>
+    <ListView
+        android:id="@+id/articles_listview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:dividerHeight="15dp"
+        android:scrollbars="none"/>
 </LinearLayout>

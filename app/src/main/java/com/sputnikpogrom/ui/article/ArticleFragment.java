@@ -8,8 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.sputnikpogrom.loaders.ArticleLoader;
 
 import butterknife.Bind;
@@ -21,7 +19,6 @@ import veinhorn.sputnikpogrom.R;
  */
 public class ArticleFragment extends Fragment {
     @Bind(R.id.articleWebView) WebView articleWebView;
-    @Bind(R.id.adView) AdView adView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceS) {
@@ -31,8 +28,6 @@ public class ArticleFragment extends Fragment {
 
         new ArticleLoader(activity, articleWebView).execute(getArguments().getString("articleUrl"));
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        adView.loadAd(adRequest);
         return view;
     }
 }
