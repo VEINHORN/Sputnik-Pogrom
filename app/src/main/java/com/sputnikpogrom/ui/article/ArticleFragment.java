@@ -18,7 +18,7 @@ import veinhorn.sputnikpogrom.R;
  * Created by veinhorn on 15.7.15.
  */
 public class ArticleFragment extends Fragment {
-    @Bind(R.id.articleWebView) WebView articleWebView;
+    @Bind(R.id.articleWebView) protected WebView articleWebView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceS) {

@@ -24,14 +24,14 @@ import com.sputnikpogrom.utils.NetworkUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnItemClick;
 import veinhorn.sputnikpogrom.R;
 
 /**
  * Created by veinhorn on 1.7.15.
  */
 public class CategoryFragment extends Fragment {
-    @Bind(R.id.articles_listview) ListView articlesListView;
-
+    @Bind(R.id.articles_listview) protected ListView articlesListView;
     private ArticlesContainer articles;
     private ArticlesAdapter articlesAdapter;
     private PageNumberHolder pageNumberHolder;
@@ -52,18 +52,6 @@ public class CategoryFragment extends Fragment {
 
             new ArticlesLoader(activity, articles, articlesAdapter).execute(categoryType, pageNumberHolder.getPageNumber());
             pageNumberHolder.increment();
-
-            articlesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Fragment articleFragment = new ArticleFragment();
-                    Bundle bundle = new Bundle();
-                    Article article = articles.getArticle(position);
-                    bundle.putString("articleUrl", article.getArticleUrl());
-                    articleFragment.setArguments(bundle);
-                    ((NavigationDrawerActivity) activity).setFragmentChild(articleFragment, article.getTitle());
-                }
-            });
 
             articlesListView.setOnScrollListener(new AbsListView.OnScrollListener() {
                 private int firstVisibleItem;
@@ -95,5 +83,15 @@ public class CategoryFragment extends Fragment {
             DialogsUtil.showNoInternetConnectionDialog(activity);
             return view;
         }
+    }
+
+    @OnItemClick(R.id.articles_listview)
+    protected void selectCategory(AdapterView<?> parent, View view, int position, long id) {
+        Fragment articleFragment = new ArticleFragment();
+        Bundle bundle = new Bundle();
+        Article article = articles.getArticle(position);
+        bundle.putString("articleUrl", article.getArticleUrl());
+        articleFragment.setArguments(bundle);
+        ((NavigationDrawerActivity) getActivity()).setFragmentChild(articleFragment, article.getTitle());
     }
 }
