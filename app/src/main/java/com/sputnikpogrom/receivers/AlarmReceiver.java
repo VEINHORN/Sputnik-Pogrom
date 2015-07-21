@@ -1,0 +1,33 @@
+package com.sputnikpogrom.receivers;
+
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+
+import java.util.Calendar;
+
+/**
+ * Created by veinhorn on 21.7.15.
+ */
+public class AlarmReceiver extends BroadcastReceiver {
+    private AlarmManager alarmManager;
+    private PendingIntent alarmIntent;
+
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        ////sdf
+    }
+
+    public void setAlarm(Context context) {
+        alarmManager = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, 10);
+
+    }
+}
