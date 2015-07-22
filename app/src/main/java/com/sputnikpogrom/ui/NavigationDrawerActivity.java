@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
+import com.sputnikpogrom.receivers.AlarmReceiver;
 import com.sputnikpogrom.ui.categories.CategoryFragment;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
@@ -15,8 +16,12 @@ import veinhorn.sputnikpogrom.R;
  */
 
 public class NavigationDrawerActivity extends MaterialNavigationDrawer {
+    private AlarmReceiver alarmReceiver = new AlarmReceiver();
+
     @Override
     public void init(Bundle savedInstanceState) {
+        alarmReceiver.setAlarm(this);
+
         setDrawerHeaderImage(R.drawable.nav_drawer_header);
 
         addSection(newSection(getString(R.string.fragment_home_title), getFragment(ArticlesFetcher.HOME)));

@@ -3,8 +3,11 @@ package com.sputnikpogrom.receivers;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.util.Log;
 
 import java.util.Calendar;
 
@@ -17,7 +20,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        ////sdf
+        Log.d(getClass().getName(), "Alarm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Alarm!!!!!!!!!!!!11");
     }
 
     public void setAlarm(Context context) {
@@ -28,6 +31,22 @@ public class AlarmReceiver extends BroadcastReceiver {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 10);
-        
+
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 15000, 15000, alarmIntent);
+
+        // Enable to automatically restart the alarm when the device is rebooted
+        ComponentName receiver = new ComponentName(context, BootReceiver.class);
+        PackageManager packageManager = context.getPackageManager();
+        packageManager.setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+    }
+
+    public void cancelAlarm(Context context) {
+        if(alarmManager != null) alarmManager.cancel(alarmIntent);
+
+        ComponentName receiver = new ComponentName(context, BootReceiver.class);
+        PackageManager packageManager = context.getPackageManager();
+        packageManager.setComponentEnabledSetting(receiver,
+                PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
     }
 }
