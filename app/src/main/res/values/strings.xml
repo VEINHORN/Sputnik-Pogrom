@@ -41,5 +41,10 @@
     <string name="category_videos">Videos</string>
     <!-- -->
 
+    <!-- Preferences -->
+    <string name="pref_sync">Notifications</string>
+    <string name="pref_sync_summary">Notifications about new articles</string>
+    <!-- -->
+
     <string name="adsId">ca-app-pub-4471993256799343/5710032513</string>
 </resources>

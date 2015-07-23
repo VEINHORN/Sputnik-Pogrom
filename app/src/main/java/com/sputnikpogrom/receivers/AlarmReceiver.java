@@ -32,7 +32,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 10);
 
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 15000, 15000, alarmIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 30000, 30000, alarmIntent);
 
         // Enable to automatically restart the alarm when the device is rebooted
         ComponentName receiver = new ComponentName(context, BootReceiver.class);

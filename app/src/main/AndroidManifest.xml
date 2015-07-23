@@ -21,6 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:label="@string/action_settings"
+            android:name="com.sputnikpogrom.ui.settings.SettingsActivity" />
 
         <receiver android:name="com.sputnikpogrom.receivers.AlarmReceiver"/>
         <receiver android:name="com.sputnikpogrom.receivers.BootReceiver" android:enabled="false">

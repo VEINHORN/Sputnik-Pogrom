@@ -1,12 +1,13 @@
 package com.sputnikpogrom.ui;
 
-import android.app.AlarmManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
 import com.sputnikpogrom.receivers.AlarmReceiver;
 import com.sputnikpogrom.ui.categories.CategoryFragment;
+import com.sputnikpogrom.ui.settings.SettingsActivity;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 import veinhorn.sputnikpogrom.R;
@@ -43,6 +44,8 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         addSection(newSection(getString(R.string.category_reading), getFragment(ArticlesFetcher.READING)));
         addSection(newSection(getString(R.string.category_images), getFragment(ArticlesFetcher.IMAGES)));
         addSection(newSection(getString(R.string.category_videos), getFragment(ArticlesFetcher.VIDEOS)));
+        
+        addSection(newSection("Settings", R.drawable.ic_settings, new Intent(this, SettingsActivity.class)));
 
         disableLearningPattern();
         allowArrowAnimation();
