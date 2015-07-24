@@ -17,12 +17,8 @@ import veinhorn.sputnikpogrom.R;
  */
 
 public class NavigationDrawerActivity extends MaterialNavigationDrawer {
-    private AlarmReceiver alarmReceiver = new AlarmReceiver();
-
     @Override
     public void init(Bundle savedInstanceState) {
-        alarmReceiver.setAlarm(this);
-
         setDrawerHeaderImage(R.drawable.nav_drawer_header);
 
         addSection(newSection(getString(R.string.fragment_home_title), getFragment(ArticlesFetcher.HOME)));
