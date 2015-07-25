@@ -41,7 +41,7 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         addSection(newSection(getString(R.string.category_images), getFragment(ArticlesFetcher.IMAGES)));
         addSection(newSection(getString(R.string.category_videos), getFragment(ArticlesFetcher.VIDEOS)));
         
-        addSection(newSection("Settings", R.drawable.ic_settings, new Intent(this, SettingsActivity.class)));
+        addSection(newSection(getString(R.string.action_settings), R.drawable.ic_settings, new Intent(this, SettingsActivity.class)));
 
         disableLearningPattern();
         allowArrowAnimation();

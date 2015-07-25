@@ -20,7 +20,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(getClass().getName(), "Alarm!!!!!!!!!!!!!!!!!!!!!!!!!!!!!Alarm!!!!!!!!!!!!11");
+        Log.d(getClass().getName(), "Service was started");
     }
 
     public void setAlarm(Context context) {
@@ -39,6 +39,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         PackageManager packageManager = context.getPackageManager();
         packageManager.setComponentEnabledSetting(receiver,
                 PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP);
+
+        Log.d(getClass().getName(), "Alarm was set.");
     }
 
     public void cancelAlarm(Context context) {
@@ -48,5 +50,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         PackageManager packageManager = context.getPackageManager();
         packageManager.setComponentEnabledSetting(receiver,
                 PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP);
+
+        Log.d(getClass().getName(), "Alarm was canceled");
     }
 }
