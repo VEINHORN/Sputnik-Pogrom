@@ -51,6 +51,7 @@ public class ArticleLoader extends AsyncTask<String, Void, String> {
             WebSettings settings = articleWebView.getSettings();
             settings.setDefaultTextEncodingName(ENCODING);
             settings.setJavaScriptEnabled(true);
+            settings.setBuiltInZoomControls(true);
 
             articleWebView.loadDataWithBaseURL(null, builder.toString(), MIME_TYPE, ENCODING, null);
         } else {

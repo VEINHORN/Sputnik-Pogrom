@@ -2,25 +2,29 @@ package com.sputnikpogrom.receivers;
 
 import android.app.AlarmManager;
 import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.support.v4.content.WakefulBroadcastReceiver;
 import android.util.Log;
+
+import com.sputnikpogrom.services.NotificationService;
 
 import java.util.Calendar;
 
 /**
  * Created by veinhorn on 21.7.15.
  */
-public class AlarmReceiver extends BroadcastReceiver {
+public class AlarmReceiver extends WakefulBroadcastReceiver {
     private AlarmManager alarmManager;
     private PendingIntent alarmIntent;
 
     @Override
     public void onReceive(Context context, Intent intent) {
         Log.d(getClass().getName(), "Service was started");
+        Intent service = new Intent(context, NotificationService.class);
+        startWakefulService(context, service);
     }
 
     public void setAlarm(Context context) {
@@ -32,7 +36,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         calendar.setTimeInMillis(System.currentTimeMillis());
         calendar.set(Calendar.HOUR_OF_DAY, 10);
 
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 30000, 30000, alarmIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 10000, 30000, alarmIntent);
 
         // Enable to automatically restart the alarm when the device is rebooted
         ComponentName receiver = new ComponentName(context, BootReceiver.class);
