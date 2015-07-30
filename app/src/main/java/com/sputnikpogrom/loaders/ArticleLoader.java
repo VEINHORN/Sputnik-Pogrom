@@ -28,32 +28,35 @@ public class ArticleLoader extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... urls) {
+        /*
         String articleHtml = null;
         try {
             articleHtml = ArticleFetcher.fetchArticle(urls[0]);
         } catch(IOException e) {
             Log.e(getClass().getName(), e.getMessage());
         }
-        return articleHtml;
+        return articleHtml;*/
+        return urls[0];
     }
 
     @Override
-    protected void onPostExecute(String articleHtml) {
-        if(articleHtml != null) {
-            String start = "<html><head><style>img { width: 100%; height: auto; };</style></head><body>";
+    protected void onPostExecute(String url/*articleHtml*/) {
+        if(/*articleHtml*/url != null) {
+            /*String start = "<html><head><style>img { width: 100%; height: auto; };</style></head><body>";
             String end = "</body></html>";
 
             StringBuilder builder = new StringBuilder();
             builder.append(start);
             builder.append(articleHtml);
-            builder.append(end);
+            builder.append(end);*/
 
             WebSettings settings = articleWebView.getSettings();
             settings.setDefaultTextEncodingName(ENCODING);
             settings.setJavaScriptEnabled(true);
             settings.setBuiltInZoomControls(true);
 
-            articleWebView.loadDataWithBaseURL(null, builder.toString(), MIME_TYPE, ENCODING, null);
+            articleWebView.loadUrl(url);
+            //articleWebView.loadDataWithBaseURL(null, builder.toString(), MIME_TYPE, ENCODING, null);
         } else {
             DialogsUtil.showCannotLoadArticleDialog(context);
         }

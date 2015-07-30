@@ -9,6 +9,8 @@ import java.util.List;
  * Created by veinhorn on 2.7.15.
  */
 public class ArticlesContainer {
+    private static final int NEW_ARTICLES_SIZE = 5;
+
     private List<Article> articles;
 
     public ArticlesContainer() {
@@ -42,5 +44,9 @@ public class ArticlesContainer {
 
     public boolean isEmpty() {
         return articles.isEmpty();
+    }
+
+    public List<Article> getNewArticles() {
+        return articles.subList(0, NEW_ARTICLES_SIZE);
     }
 }

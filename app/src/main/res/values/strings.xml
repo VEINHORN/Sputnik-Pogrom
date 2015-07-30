@@ -46,5 +46,9 @@
     <string name="pref_notifications_summary">Notifications about new articles</string>
     <!-- -->
 
+    <!-- Services resources -->
+    <string name="service_new_articles">New articles</string>
+    <!-- -->
+
     <string name="adsId">ca-app-pub-4471993256799343/5710032513</string>
 </resources>
