@@ -55,7 +55,10 @@ public class NotificationService extends IntentService {
         List<Article> articlesList = articles.getNewArticles();
         for(Article article : articlesList) {
             if(stringBuilder.length() == 0) stringBuilder.append(article.getTitle());
-            else stringBuilder.append(", " + article.getTitle());
+            else {
+                stringBuilder.append(", ");
+                stringBuilder.append(article.getTitle());
+            }
         }
         return stringBuilder.toString();
     }
