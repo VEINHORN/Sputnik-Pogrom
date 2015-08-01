@@ -1,9 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Спутник и Погром</string>
-    <string name="action_settings">Настройки</string>
-    <string name="action_about">О приложении</string>
-    <string name="activity_changelog">История версий</string>
     <string name="fragment_home_title">Домашняя</string>
     <string name="fragment_saved_title">Сохраненные</string>
     <string name="nav_drawer_categories">Категории</string>
@@ -22,15 +19,15 @@
     <string name="category_videos">Видео</string>
     <string name="category_science">Наука</string>
     <string name="nav_drawer_another_categories">Др. рубрики</string>
-    <string name="action_changelog">История версий</string>
     <string name="no_internet_connection">Отсутствует соединение с интернетом</string>
     <string name="no">Нет</string>
     <string name="no_internet_connection_message">Проверьте включен ли интернет и попробуйте снова</string>
     <string name="yes">Да</string>
-    <string name="action_save_article">Сохранить статью</string>
     <string name="adsId">ca-app-pub-4471993256799343/5710032513</string>
     <string name="pref_notifications">Уведомления</string>
     <string name="pref_notifications_summary">Уведомления о выходе новых статей на сайте</string>
     <string name="service_new_articles">Новые статьи</string>
     <string name="ok">OK</string>
+    <string name="fragment_article_share">Поделиться</string>
+    <string name="action_settings">Настройки</string>
 </resources>

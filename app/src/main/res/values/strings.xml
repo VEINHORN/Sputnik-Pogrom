@@ -1,25 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Sputnik and Pogrom</string>
-    <!-- Menus string resources-->
-    <string name="action_settings">Settings</string>
-    <string name="action_changelog">Version History</string>
-    <string name="action_about">About</string>
-    <string name="action_save_article">Save article</string>
-    <!-- -->
 
     <string name="no_internet_connection">No internet connection</string>
     <string name="no_internet_connection_message">Check your internet connection and try again</string>
     <string name="ok">OK</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
-    <!-- Activity string resources -->
-    <string name="activity_changelog">Change log</string>
-    <!-- -->
 
     <!-- Fragments string resources -->
     <string name="fragment_home_title">Home</string>
     <string name="fragment_saved_title">Saved</string>
+    <!-- -->
+
+    <!-- Article Fragment -->
+    <string name="fragment_article_share">Share</string>
     <!-- -->
 
     <!-- Navigation drawer string resources -->
@@ -43,6 +38,7 @@
     <!-- -->
 
     <!-- Preferences -->
+    <string name="action_settings">Settings</string>
     <string name="pref_notifications">Notifications</string>
     <string name="pref_notifications_summary">Notifications about new articles</string>
     <!-- -->
