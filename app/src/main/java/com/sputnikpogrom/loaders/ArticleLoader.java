@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import com.sputnikpogrom.fetchers.ArticleFetcher;
 import com.sputnikpogrom.utils.DialogsUtil;
@@ -28,37 +29,35 @@ public class ArticleLoader extends AsyncTask<String, Void, String> {
 
     @Override
     protected String doInBackground(String... urls) {
-        /*
         String articleHtml = null;
         try {
-            articleHtml = ArticleFetcher.fetchArticle(urls[0]);
+            articleHtml = ArticleFetcher.fetchFullArticleHtml(urls[0]);
         } catch(IOException e) {
             Log.e(getClass().getName(), e.getMessage());
         }
-        return articleHtml;*/
-        return urls[0];
+        return articleHtml;
     }
 
     @Override
-    protected void onPostExecute(String url/*articleHtml*/) {
-        if(/*articleHtml*/url != null) {
-            /*String start = "<html><head><style>img { width: 100%; height: auto; };</style></head><body>";
-            String end = "</body></html>";
-
-            StringBuilder builder = new StringBuilder();
-            builder.append(start);
-            builder.append(articleHtml);
-            builder.append(end);*/
-
+    protected void onPostExecute(String articleHtml) {
+        if(articleHtml != null) {
             WebSettings settings = articleWebView.getSettings();
             settings.setDefaultTextEncodingName(ENCODING);
             settings.setJavaScriptEnabled(true);
             settings.setBuiltInZoomControls(true);
 
-            articleWebView.loadUrl(url);
-            //articleWebView.loadDataWithBaseURL(null, builder.toString(), MIME_TYPE, ENCODING, null);
+            articleWebView.setWebViewClient(new CustomWebViewClient());
+            articleWebView.loadDataWithBaseURL(null, articleHtml, MIME_TYPE, ENCODING, null);
         } else {
             DialogsUtil.showCannotLoadArticleDialog(context);
+        }
+    }
+
+    private class CustomWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
         }
     }
 }

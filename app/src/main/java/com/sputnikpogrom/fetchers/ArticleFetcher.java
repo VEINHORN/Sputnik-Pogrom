@@ -25,4 +25,8 @@ public class ArticleFetcher {
             return null;
         }
     }
+
+    public static String fetchFullArticleHtml(String articleUrl) throws IOException {
+        return Jsoup.connect(articleUrl).get().html();
+    }
 }
