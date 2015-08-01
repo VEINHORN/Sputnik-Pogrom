@@ -11,6 +11,7 @@ import com.sputnikpogrom.entities.Article;
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
 import com.sputnikpogrom.holders.PageNumberHolder;
+import com.sputnikpogrom.utils.NetworkUtil;
 
 import java.io.IOException;
 import java.util.List;
@@ -33,7 +34,7 @@ public class NotificationService extends IntentService {
         if(articles == null) {
             Log.d(getClass().getName(), "Cannot show notification (articles was not loaded)");
         } else {
-            showNotification(articles);
+            if(NetworkUtil.isNetworkAvailable(this)) showNotification(articles);
         }
     }
 

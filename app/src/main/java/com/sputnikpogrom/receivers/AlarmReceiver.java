@@ -22,7 +22,7 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.d(getClass().getName(), "Service was started");
+        Log.d(getClass().getName(), "NotificationService was started");
         Intent service = new Intent(context, NotificationService.class);
         startWakefulService(context, service);
     }
@@ -32,11 +32,13 @@ public class AlarmReceiver extends WakefulBroadcastReceiver {
         Intent intent = new Intent(context, AlarmReceiver.class);
         alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
 
+        // Set the alarm to start at 9:00 a.m.
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(Calendar.HOUR_OF_DAY, 10);
+        calendar.set(Calendar.HOUR_OF_DAY, 9);
 
-        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, 10000, 30000, alarmIntent);
+        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
+                AlarmManager.INTERVAL_HALF_DAY, alarmIntent);
 
         // Enable to automatically restart the alarm when the device is rebooted
         ComponentName receiver = new ComponentName(context, BootReceiver.class);
