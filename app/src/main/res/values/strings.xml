@@ -9,7 +9,8 @@
     <!-- -->
 
     <string name="no_internet_connection">No internet connection</string>
-    <string name="no_internet_connection_message">Would you like to open saved articles?</string>
+    <string name="no_internet_connection_message">Check your internet connection and try again</string>
+    <string name="ok">OK</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
     <!-- Activity string resources -->

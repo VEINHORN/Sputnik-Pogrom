@@ -17,16 +17,8 @@ public class DialogsUtil {
         return new MaterialDialog.Builder(context)
                 .title(context.getString(R.string.no_internet_connection))
                 .content(context.getString(R.string.no_internet_connection_message))
-                .positiveText(context.getString(R.string.yes))
-                .negativeText(context.getString(R.string.no))
+                .positiveText(context.getString(R.string.ok))
                 .positiveColor(Color.GRAY)
-                .negativeColor(Color.GRAY)
-                .callback(new MaterialDialog.ButtonCallback() {
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                        Toast.makeText(context, "Test", Toast.LENGTH_SHORT).show();
-                    }
-                })
                 .show();
     }
 
