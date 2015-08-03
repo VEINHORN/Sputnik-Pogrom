@@ -3,13 +3,17 @@ package com.sputnikpogrom.ui;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
 import com.sputnikpogrom.receivers.AlarmReceiver;
 import com.sputnikpogrom.ui.categories.CategoryFragment;
+import com.sputnikpogrom.ui.categories.newarticles.NewArticlesFragment;
 import com.sputnikpogrom.ui.settings.SettingsActivity;
 
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
+import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 import veinhorn.sputnikpogrom.R;
 
 /**
@@ -22,6 +26,9 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         setDrawerHeaderImage(R.drawable.nav_drawer_header);
 
         addSection(newSection(getString(R.string.fragment_home_title), getFragment(ArticlesFetcher.HOME)));
+
+        MaterialSection newArticlesSection = newSection(getString(R.string.fragment_new_articles_title), getNewArticlesFragment(ArticlesFetcher.HOME));
+        addSection(newArticlesSection);
 
         addSubheader(getString(R.string.nav_drawer_categories));
         addSection(newSection(getString(R.string.category_best_articles), getFragment(ArticlesFetcher.BEST)));
@@ -40,16 +47,30 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         addSection(newSection(getString(R.string.category_reading), getFragment(ArticlesFetcher.READING)));
         addSection(newSection(getString(R.string.category_images), getFragment(ArticlesFetcher.IMAGES)));
         addSection(newSection(getString(R.string.category_videos), getFragment(ArticlesFetcher.VIDEOS)));
-        
+
+        addDivisor();
         addSection(newSection(getString(R.string.action_settings), R.drawable.ic_settings, new Intent(this, SettingsActivity.class)));
 
         disableLearningPattern();
         allowArrowAnimation();
+
+        boolean isOpenNewArticlesFragment = getIntent().getBooleanExtra("open_new_articles_fragment", false);
+        if(isOpenNewArticlesFragment) {
+            //onClick(newArticlesSection);
+            this.setSection(newArticlesSection);
+            this.changeToolbarColor(newArticlesSection);
+            this.setFragment(newArticlesSection.getTargetFragment(), newArticlesSection.getTitle());
+        }
     }
 
     private Fragment getFragment(int categoryType) {
         Fragment fragment = new CategoryFragment();
-        Bundle bundle = new Bundle();
+        fragment.setArguments(getBundle(categoryType));
+        return fragment;
+    }
+
+    private Fragment getNewArticlesFragment(int categoryType) {
+        Fragment fragment = new NewArticlesFragment();
         fragment.setArguments(getBundle(categoryType));
         return fragment;
     }

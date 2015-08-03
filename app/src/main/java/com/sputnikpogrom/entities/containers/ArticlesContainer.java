@@ -9,7 +9,7 @@ import java.util.List;
  * Created by veinhorn on 2.7.15.
  */
 public class ArticlesContainer {
-    private static final int NEW_ARTICLES_SIZE = 5;
+    private static final int NEW_ARTICLES_SIZE = 6;
 
     private List<Article> articles;
 

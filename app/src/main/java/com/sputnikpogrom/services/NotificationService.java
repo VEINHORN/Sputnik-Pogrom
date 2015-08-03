@@ -3,14 +3,18 @@ package com.sputnikpogrom.services;
 import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
 import com.sputnikpogrom.entities.Article;
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
 import com.sputnikpogrom.holders.PageNumberHolder;
+import com.sputnikpogrom.ui.NavigationDrawerActivity;
+import com.sputnikpogrom.ui.categories.newarticles.NewArticlesFragment;
 import com.sputnikpogrom.utils.NetworkUtil;
 
 import java.io.IOException;
@@ -40,14 +44,26 @@ public class NotificationService extends IntentService {
 
     private void showNotification(ArticlesContainer articles) {
         String contentText = createContentText(articles);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle(getString(R.string.service_new_articles))
                 .setContentText(contentText)
+                //.setAutoCancel(true)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(contentText));
+
+        Intent intent = new Intent(this, NavigationDrawerActivity.class);
+        intent.putExtra("open_new_articles_fragment", true);
+
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+        stackBuilder.addParentStack(NavigationDrawerActivity.class);
+        stackBuilder.addNextIntent(intent);
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        notificationBuilder.setContentIntent(pendingIntent);
+
         NotificationManager notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
-        notificationManager.notify(NOTIFICATION_ID, builder.build());
+        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build());
     }
 
     private String createContentText(ArticlesContainer articles) {

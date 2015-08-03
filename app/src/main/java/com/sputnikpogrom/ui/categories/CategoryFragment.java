@@ -34,10 +34,10 @@ import veinhorn.sputnikpogrom.R;
  */
 public class CategoryFragment extends Fragment {
     @Bind(R.id.articles_listview) protected ListView articlesListView;
-    private ArticlesContainer articles;
-    private ArticlesAdapter articlesAdapter;
-    private PageNumberHolder pageNumberHolder;
-    private int categoryType;
+    protected ArticlesContainer articles;
+    protected ArticlesAdapter articlesAdapter;
+    protected PageNumberHolder pageNumberHolder;
+    protected int categoryType;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

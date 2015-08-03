@@ -8,16 +8,14 @@
     <string name="yes">Yes</string>
     <string name="no">No</string>
 
-    <!-- Fragments string resources -->
-    <string name="fragment_home_title">Home</string>
-    <string name="fragment_saved_title">Saved</string>
-    <!-- -->
-
     <!-- Article Fragment -->
     <string name="fragment_article_share">Share</string>
     <!-- -->
 
     <!-- Navigation drawer string resources -->
+    <string name="fragment_home_title">Home</string>
+    <string name="fragment_new_articles_title">New articles</string>
+
     <string name="nav_drawer_categories">Categories</string>
     <string name="category_best_articles">Best articles</string>
     <string name="category_important_articles">Important articles</string>
