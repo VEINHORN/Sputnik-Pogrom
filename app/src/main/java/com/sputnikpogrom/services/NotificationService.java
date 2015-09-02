@@ -49,11 +49,11 @@ public class NotificationService extends IntentService {
                 .setSmallIcon(R.drawable.notification_icon)
                 .setContentTitle(getString(R.string.service_new_articles))
                 .setContentText(contentText)
-                //.setAutoCancel(true)
+                .setAutoCancel(true)
                 .setStyle(new NotificationCompat.BigTextStyle().bigText(contentText));
 
         Intent intent = new Intent(this, NavigationDrawerActivity.class);
-        intent.putExtra("open_new_articles_fragment", true);
+        intent.putExtra("open_new_articles", true);
 
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
         stackBuilder.addParentStack(NavigationDrawerActivity.class);

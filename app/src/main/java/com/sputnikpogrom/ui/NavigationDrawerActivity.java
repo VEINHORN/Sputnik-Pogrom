@@ -26,9 +26,7 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         setDrawerHeaderImage(R.drawable.nav_drawer_header);
 
         addSection(newSection(getString(R.string.fragment_home_title), getFragment(ArticlesFetcher.HOME)));
-
-        MaterialSection newArticlesSection = newSection(getString(R.string.fragment_new_articles_title), getNewArticlesFragment(ArticlesFetcher.HOME));
-        addSection(newArticlesSection);
+        addSection(newSection(getString(R.string.fragment_new_articles_title), getNewArticlesFragment(ArticlesFetcher.HOME)));
 
         addSubheader(getString(R.string.nav_drawer_categories));
         addSection(newSection(getString(R.string.category_best_articles), getFragment(ArticlesFetcher.BEST)));
@@ -54,10 +52,8 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         disableLearningPattern();
         allowArrowAnimation();
 
-        boolean isOpenNewArticlesFragment = getIntent().getBooleanExtra("open_new_articles_fragment", false);
-        if(isOpenNewArticlesFragment) {
-
-        }
+        boolean isOpenNewArticlesFragment = getIntent().getBooleanExtra("open_new_articles", false);
+        if(isOpenNewArticlesFragment) setDefaultSectionLoaded(1); // 1 - number of "New articles" category
     }
 
     private Fragment getFragment(int categoryType) {
