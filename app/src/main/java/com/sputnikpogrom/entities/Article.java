@@ -8,6 +8,16 @@ public class Article {
     private String posterUrl;
     private String articleUrl;
 
+    public Article() {
+
+    }
+
+    public Article(String title, String posterUrl, String articleUrl) {
+        this.title = title;
+        this.posterUrl = posterUrl;
+        this.articleUrl = articleUrl;
+    }
+
     public String getTitle() {
         return title;
     }

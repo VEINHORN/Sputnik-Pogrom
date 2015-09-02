@@ -56,10 +56,7 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
 
         boolean isOpenNewArticlesFragment = getIntent().getBooleanExtra("open_new_articles_fragment", false);
         if(isOpenNewArticlesFragment) {
-            //onClick(newArticlesSection);
-            this.setSection(newArticlesSection);
-            this.changeToolbarColor(newArticlesSection);
-            this.setFragment(newArticlesSection.getTargetFragment(), newArticlesSection.getTitle());
+
         }
     }
 

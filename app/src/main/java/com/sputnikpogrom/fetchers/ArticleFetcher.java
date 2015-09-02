@@ -10,6 +10,7 @@ import java.io.IOException;
  * Created by veinhorn on 16.7.15.
  */
 public class ArticleFetcher {
+    @Deprecated
     public static String fetchArticle(String articleUrl) throws IOException {
         Document document = Jsoup.connect(articleUrl).get();
         if(document != null) {
@@ -27,6 +28,7 @@ public class ArticleFetcher {
     }
 
     public static String fetchFullArticleHtml(String articleUrl) throws IOException {
-        return Jsoup.connect(articleUrl).get().html();
+        if(articleUrl.isEmpty()) return "";
+        else return Jsoup.connect(articleUrl).get().html();
     }
 }

@@ -40,7 +40,7 @@ public class ArticleLoader extends AsyncTask<String, Void, String> {
 
     @Override
     protected void onPostExecute(String articleHtml) {
-        if(articleHtml != null) {
+        if(articleHtml != null && !articleHtml.isEmpty()) {
             WebSettings settings = articleWebView.getSettings();
             settings.setDefaultTextEncodingName(ENCODING);
             settings.setJavaScriptEnabled(true);

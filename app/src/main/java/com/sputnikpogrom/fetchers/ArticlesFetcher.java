@@ -76,18 +76,22 @@ public class ArticlesFetcher {
 
     private static List<Article> fetchArticles(String url) throws IOException {
         List<Article> articles = new ArrayList<>();
-
         Element contentElement = Jsoup.connect(url).get().getElementById("content");
         Elements articleElements = contentElement.getElementsByClass("item-inner");
 
-        for(Element articleElm : articleElements) {
-            Article article = new Article();
-            Elements articleHrefElms = articleElm.getElementsByTag("a");
-            article.setTitle(articleHrefElms.get(1).text());
-            article.setArticleUrl(articleHrefElms.get(0).attr("href"));
-            article.setPosterUrl(articleElm.getElementsByTag("img").get(0).attr("src"));
-            articles.add(article);
-        }
+        for(Element articleElm : articleElements) articles.add(createArticle(articleElm));
         return articles;
+    }
+
+    private static Article createArticle(Element articleElm) {
+        Article article = new Article("", "", "");
+        Elements articleHrefElms = articleElm.getElementsByTag("a");
+        if(articleHrefElms.size() > 1) {
+            article.setArticleUrl(articleHrefElms.get(0).attr("href"));
+            article.setTitle(articleHrefElms.get(1).text());
+        }
+        Elements imgElements = articleElm.getElementsByTag("img");
+        if(!imgElements.isEmpty()) article.setPosterUrl(imgElements.get(0).attr("src"));
+        return article;
     }
 }
