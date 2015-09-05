@@ -10,9 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.widget.Toast;
 
 import com.sputnikpogrom.loaders.ArticleLoader;
+import com.sputnikpogrom.utils.ShareUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -46,7 +46,7 @@ public class ArticleFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_share:
-                Toast.makeText(getActivity(), "test", Toast.LENGTH_SHORT).show();
+                ShareUtil.share(getActivity(), getArguments().getString("articleUrl"));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

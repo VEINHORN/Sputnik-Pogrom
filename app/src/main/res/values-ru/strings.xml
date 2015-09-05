@@ -30,4 +30,5 @@
     <string name="fragment_article_share">Поделиться</string>
     <string name="action_settings">Настройки</string>
     <string name="fragment_new_articles_title">Новые статьи</string>
+    <string name="appUrl">https://play.google.com/store/apps/details?id=com.sputnikpogrom</string>
 </resources>

@@ -3,10 +3,8 @@ package com.sputnikpogrom;
 import android.app.Application;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
 import com.sputnikpogrom.receivers.AlarmReceiver;
 
-import java.util.Map;
 
 /**
  * Created by veinhorn on 24.7.15.
