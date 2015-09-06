@@ -14,6 +14,8 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.sputnikpogrom.entities.Article;
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.sputnikpogrom.holders.PageNumberHolder;
@@ -34,6 +36,7 @@ import veinhorn.sputnikpogrom.R;
  */
 public class CategoryFragment extends Fragment {
     @Bind(R.id.articles_listview) protected ListView articlesListView;
+    @Bind(R.id.adView) protected AdView adView;
     protected ArticlesContainer articles;
     protected ArticlesAdapter articlesAdapter;
     protected PageNumberHolder pageNumberHolder;
@@ -46,6 +49,10 @@ public class CategoryFragment extends Fragment {
 
         if(NetworkUtil.isNetworkAvailable(activity)) {
             ButterKnife.bind(this, view);
+
+            AdRequest adRequest = new AdRequest.Builder().build();
+            adView.loadAd(adRequest);
+
             articles = new ArticlesContainer();
             articlesAdapter = new ArticlesAdapter(activity, articles);
             articlesListView.setAdapter(articlesAdapter);
