@@ -90,7 +90,8 @@ public class ArticlesAdapter extends BaseAdapter {
         };
 
         targets.add(target);
-        Picasso.with(context).load(articles.getArticle(position).getPosterUrl()).into(target);
+        String posterUrl = articles.getArticle(position).getPosterUrl();
+        if(!"".equals(posterUrl)) Picasso.with(context).load(posterUrl).into(target);
         return convertView;
     }
 
