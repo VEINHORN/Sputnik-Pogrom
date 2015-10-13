@@ -16,6 +16,7 @@ import java.io.IOException;
  * Created by veinhorn on 16.7.15.
  */
 public class ArticleLoader extends AsyncTask<String, Void, String> {
+    private static final String TAG = "ArticleLoader";
     private static final String MIME_TYPE = "text/html";
     private static final String ENCODING = "utf-8";
 
@@ -33,7 +34,7 @@ public class ArticleLoader extends AsyncTask<String, Void, String> {
         try {
             articleHtml = ArticleFetcher.fetchFullArticleHtml(urls[0]);
         } catch(IOException e) {
-            Log.e(getClass().getName(), e.getMessage());
+            if(e.getMessage() != null) Log.e(TAG, e.getMessage());
         }
         return articleHtml;
     }
