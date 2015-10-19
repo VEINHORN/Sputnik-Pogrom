@@ -77,9 +77,10 @@ public class ArticlesFetcher {
     private static List<Article> fetchArticles(String url) throws IOException {
         List<Article> articles = new ArrayList<>();
         Element contentElement = Jsoup.connect(url).get().getElementById("content");
-        Elements articleElements = contentElement.getElementsByClass("item-inner");
-
-        for(Element articleElm : articleElements) articles.add(createArticle(articleElm));
+        if(contentElement != null) {
+            Elements articleElements = contentElement.getElementsByClass("item-inner");
+            for(Element articleElm : articleElements) articles.add(createArticle(articleElm));
+        }
         return articles;
     }
 
