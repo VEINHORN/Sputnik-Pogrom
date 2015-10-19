@@ -31,4 +31,6 @@
     <string name="action_settings">Настройки</string>
     <string name="fragment_new_articles_title">Новые статьи</string>
     <string name="appUrl">https://play.google.com/store/apps/details?id=com.sputnikpogrom</string>
+    <string name="action_paid">S&amp;P Премиум</string>
+    <string name="paidAppUrl">market://details?id=com.veinhorn.sputnikpogrom.paid</string>
 </resources>

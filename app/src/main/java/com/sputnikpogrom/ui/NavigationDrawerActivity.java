@@ -1,19 +1,14 @@
 package com.sputnikpogrom.ui;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
-import com.sputnikpogrom.receivers.AlarmReceiver;
 import com.sputnikpogrom.ui.categories.CategoryFragment;
 import com.sputnikpogrom.ui.categories.newarticles.NewArticlesFragment;
 import com.sputnikpogrom.ui.settings.SettingsActivity;
-
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
-import it.neokree.materialnavigationdrawer.elements.MaterialSection;
 import veinhorn.sputnikpogrom.R;
 
 /**
@@ -47,6 +42,7 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         addSection(newSection(getString(R.string.category_videos), getFragment(ArticlesFetcher.VIDEOS)));
 
         addDivisor();
+        addSection(newSection(getString(R.string.action_paid), R.drawable.ic_paid, getPaidUrlIntent()));
         addSection(newSection(getString(R.string.action_settings), R.drawable.ic_settings, new Intent(this, SettingsActivity.class)));
 
         disableLearningPattern();
@@ -72,5 +68,9 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         Bundle bundle = new Bundle();
         bundle.putInt("categoryType", categoryType);
         return bundle;
+    }
+
+    private Intent getPaidUrlIntent() {
+        return new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.paidAppUrl)));
     }
 }
