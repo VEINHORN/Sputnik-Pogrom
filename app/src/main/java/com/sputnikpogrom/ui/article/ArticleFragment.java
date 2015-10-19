@@ -9,11 +9,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.sputnikpogrom.loaders.ArticleLoader;
 import com.sputnikpogrom.utils.ShareUtil;
 
 import butterknife.Bind;
@@ -25,6 +24,7 @@ import veinhorn.sputnikpogrom.R;
  */
 public class ArticleFragment extends Fragment {
     @Bind(R.id.articleWebView) protected WebView articleWebView;
+    private String articleUrl;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceS) {
@@ -32,7 +32,11 @@ public class ArticleFragment extends Fragment {
         Activity activity = getActivity();
         View view = inflater.inflate(R.layout.fragment_article, container, false);
         ButterKnife.bind(this, view);
-        new ArticleLoader(activity, articleWebView).execute(getArguments().getString("articleUrl"));
+
+        articleUrl = getArguments().getString("articleUrl");
+
+        loadArticle();
+        //new ArticleLoader(activity, articleWebView).execute(getArguments().getString("articleUrl"));
         return view;
     }
 
@@ -47,10 +51,26 @@ public class ArticleFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_share:
-                ShareUtil.share(getActivity(), getArguments().getString("articleUrl"));
+                ShareUtil.share(getActivity(), articleUrl);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void loadArticle() {
+        WebSettings settings = articleWebView.getSettings();
+        settings.setJavaScriptEnabled(true);
+        articleWebView.loadUrl(articleUrl);
+
+        articleWebView.setWebViewClient(new CustomWebViewClient());
+    }
+
+    private class CustomWebViewClient extends WebViewClient {
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+            view.loadUrl(url);
+            return true;
         }
     }
 }
