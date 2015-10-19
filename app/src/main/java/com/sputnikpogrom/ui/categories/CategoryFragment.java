@@ -4,6 +4,8 @@ package com.sputnikpogrom.ui.categories;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -14,6 +16,9 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.github.ksoichiro.android.observablescrollview.ObservableListView;
+import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
+import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.sputnikpogrom.entities.Article;
@@ -34,8 +39,8 @@ import veinhorn.sputnikpogrom.R;
 /**
  * Created by veinhorn on 1.7.15.
  */
-public class CategoryFragment extends Fragment {
-    @Bind(R.id.articles_listview) protected ListView articlesListView;
+public class CategoryFragment extends Fragment implements ObservableScrollViewCallbacks {
+    @Bind(R.id.articles_listview) protected ObservableListView articlesListView;
     @Bind(R.id.categoryAdView) protected AdView adView;
     protected ArticlesContainer articles;
     protected ArticlesAdapter articlesAdapter;
@@ -56,6 +61,8 @@ public class CategoryFragment extends Fragment {
             articles = new ArticlesContainer();
             articlesAdapter = new ArticlesAdapter(activity, articles);
             articlesListView.setAdapter(articlesAdapter);
+            articlesListView.setScrollViewCallbacks(this);
+
             pageNumberHolder = new PageNumberHolder();
             categoryType = getArguments().getInt("categoryType");
 
@@ -102,5 +109,25 @@ public class CategoryFragment extends Fragment {
         bundle.putString("articleUrl", article.getArticleUrl());
         articleFragment.setArguments(bundle);
         ((NavigationDrawerActivity) getActivity()).setFragmentChild(articleFragment, article.getTitle());
+    }
+
+    @Override
+    public void onScrollChanged(int scrollY, boolean firstScroll, boolean dragging) { }
+
+    @Override
+    public void onDownMotionEvent() { }
+
+    @Override
+    public void onUpOrCancelMotionEvent(ScrollState scrollState) {
+        ActionBar actionBar = ((ActionBarActivity)getActivity()).getSupportActionBar();
+        if(scrollState == ScrollState.UP) {
+            if(actionBar.isShowing()) {
+                actionBar.hide();
+            }
+        } else if(scrollState == ScrollState.DOWN) {
+            if(!actionBar.isShowing()) {
+                actionBar.show();
+            }
+        }
     }
 }
