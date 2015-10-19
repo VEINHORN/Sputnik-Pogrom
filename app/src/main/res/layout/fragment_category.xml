@@ -11,12 +11,11 @@
         android:scrollbars="none"/>
 
     <com.google.android.gms.ads.AdView
-        android:id="@+id/adView"
+        android:id="@+id/categoryAdView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
         ads:adSize="SMART_BANNER"
-        ads:adUnitId="@string/adsId">
-    </com.google.android.gms.ads.AdView>
+        ads:adUnitId="@string/adsId" />
 </RelativeLayout>

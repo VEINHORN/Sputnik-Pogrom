@@ -26,7 +26,7 @@ import veinhorn.sputnikpogrom.R;
  * Created by veinhorn on 2.8.15.
  */
 public class NewArticlesFragment extends CategoryFragment {
-    @Bind(R.id.adView) protected AdView adView;
+    @Bind(R.id.categoryAdView) protected AdView adView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

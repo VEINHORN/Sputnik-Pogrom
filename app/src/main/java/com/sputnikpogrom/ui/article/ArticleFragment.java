@@ -9,6 +9,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.sputnikpogrom.loaders.article.ArticleLoader;
 import com.sputnikpogrom.utils.ShareUtil;
 
@@ -21,6 +24,7 @@ import veinhorn.sputnikpogrom.R;
  */
 public class ArticleFragment extends Fragment {
     @Bind(R.id.articleWebView) protected WebView articleWebView;
+    @Bind(R.id.articleAdView) protected AdView adView;
     private String articleUrl;
 
     @Override
@@ -28,6 +32,9 @@ public class ArticleFragment extends Fragment {
         setHasOptionsMenu(true);
         View view = inflater.inflate(R.layout.fragment_article, container, false);
         ButterKnife.bind(this, view);
+
+        AdRequest request = new AdRequest.Builder().build();
+        adView.loadAd(request);
 
         articleUrl = getArguments().getString("articleUrl");
         new ArticleLoader(articleWebView).load(articleUrl);

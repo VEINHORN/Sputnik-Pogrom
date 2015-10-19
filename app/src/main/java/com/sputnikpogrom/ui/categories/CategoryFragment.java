@@ -36,7 +36,7 @@ import veinhorn.sputnikpogrom.R;
  */
 public class CategoryFragment extends Fragment {
     @Bind(R.id.articles_listview) protected ListView articlesListView;
-    @Bind(R.id.adView) protected AdView adView;
+    @Bind(R.id.categoryAdView) protected AdView adView;
     protected ArticlesContainer articles;
     protected ArticlesAdapter articlesAdapter;
     protected PageNumberHolder pageNumberHolder;
@@ -50,8 +50,8 @@ public class CategoryFragment extends Fragment {
         if(NetworkUtil.isNetworkAvailable(activity)) {
             ButterKnife.bind(this, view);
 
-            AdRequest adRequest = new AdRequest.Builder().build();
-            adView.loadAd(adRequest);
+            AdRequest request = new AdRequest.Builder().build();
+            adView.loadAd(request);
 
             articles = new ArticlesContainer();
             articlesAdapter = new ArticlesAdapter(activity, articles);
