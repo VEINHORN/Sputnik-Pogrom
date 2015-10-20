@@ -8,14 +8,10 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
-import android.widget.ListView;
-
 import com.github.ksoichiro.android.observablescrollview.ObservableListView;
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
@@ -120,6 +116,9 @@ public class CategoryFragment extends Fragment implements ObservableScrollViewCa
     @Override
     public void onUpOrCancelMotionEvent(ScrollState scrollState) {
         ActionBar actionBar = ((ActionBarActivity)getActivity()).getSupportActionBar();
+        if(actionBar == null) {
+            return;
+        }
         if(scrollState == ScrollState.UP) {
             if(actionBar.isShowing()) {
                 actionBar.hide();
