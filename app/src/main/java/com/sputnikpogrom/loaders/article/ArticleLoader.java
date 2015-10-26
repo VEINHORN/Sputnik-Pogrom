@@ -18,7 +18,6 @@ public class ArticleLoader {
         WebSettings settings = webView.getSettings();
         settings.setJavaScriptEnabled(true);
         webView.setWebViewClient(new CustomWebViewClient());
-
         webView.loadUrl(articleUrl);
     }
 
