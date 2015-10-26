@@ -6,9 +6,8 @@ import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.sputnikpogrom.R;
 import com.sputnikpogrom.SPApplication;
-
-import veinhorn.sputnikpogrom.R;
 
 /**
  * Created by veinhorn on 23.7.15.

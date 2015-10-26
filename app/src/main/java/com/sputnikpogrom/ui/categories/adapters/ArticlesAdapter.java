@@ -13,6 +13,7 @@ import android.view.WindowManager;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
+import com.sputnikpogrom.R;
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -22,7 +23,6 @@ import java.util.Set;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import veinhorn.sputnikpogrom.R;
 
 /**
  * Created by veinhorn on 5.7.15.

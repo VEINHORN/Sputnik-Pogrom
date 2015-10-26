@@ -1,13 +1,9 @@
 package com.sputnikpogrom.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
-import android.widget.Toast;
-
 import com.afollestad.materialdialogs.MaterialDialog;
-
-import veinhorn.sputnikpogrom.R;
+import com.sputnikpogrom.R;
 
 /**
  * Created by veinhorn on 25.2.15.

@@ -9,6 +9,7 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
+import com.sputnikpogrom.R;
 import com.sputnikpogrom.entities.Article;
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
@@ -19,8 +20,6 @@ import com.sputnikpogrom.utils.NetworkUtil;
 
 import java.io.IOException;
 import java.util.List;
-
-import veinhorn.sputnikpogrom.R;
 
 /**
  * Created by veinhorn on 25.7.15.

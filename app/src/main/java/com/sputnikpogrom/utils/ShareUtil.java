@@ -3,7 +3,7 @@ package com.sputnikpogrom.utils;
 import android.content.Context;
 import android.content.Intent;
 
-import veinhorn.sputnikpogrom.R;
+import com.sputnikpogrom.R;
 
 /**
  * Created by veinhorn on 5.9.15.

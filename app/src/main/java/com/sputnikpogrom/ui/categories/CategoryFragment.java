@@ -17,6 +17,7 @@ import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCal
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.sputnikpogrom.R;
 import com.sputnikpogrom.entities.Article;
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.sputnikpogrom.holders.PageNumberHolder;
@@ -30,7 +31,6 @@ import com.sputnikpogrom.utils.NetworkUtil;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnItemClick;
-import veinhorn.sputnikpogrom.R;
 
 /**
  * Created by veinhorn on 1.7.15.

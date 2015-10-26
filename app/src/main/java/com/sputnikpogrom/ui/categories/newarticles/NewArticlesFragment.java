@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.sputnikpogrom.R;
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
 import com.sputnikpogrom.holders.PageNumberHolder;
@@ -20,7 +21,6 @@ import com.sputnikpogrom.utils.NetworkUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import veinhorn.sputnikpogrom.R;
 
 /**
  * Created by veinhorn on 2.8.15.

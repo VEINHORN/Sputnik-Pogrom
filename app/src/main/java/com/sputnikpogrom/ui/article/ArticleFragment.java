@@ -16,12 +16,12 @@ import com.github.ksoichiro.android.observablescrollview.ObservableWebView;
 import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.sputnikpogrom.R;
 import com.sputnikpogrom.loaders.article.ArticleLoader;
 import com.sputnikpogrom.utils.ShareUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import veinhorn.sputnikpogrom.R;
 
 /**
  * Created by veinhorn on 15.7.15.
