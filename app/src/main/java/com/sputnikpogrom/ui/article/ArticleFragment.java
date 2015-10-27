@@ -1,6 +1,7 @@
 package com.sputnikpogrom.ui.article;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
@@ -10,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.github.ksoichiro.android.observablescrollview.ObservableScrollViewCallbacks;
 import com.github.ksoichiro.android.observablescrollview.ObservableWebView;
@@ -17,11 +19,15 @@ import com.github.ksoichiro.android.observablescrollview.ScrollState;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.sputnikpogrom.R;
+import com.sputnikpogrom.db.dao.FavouriteDAO;
+import com.sputnikpogrom.db.dao.FavouriteDAOImpl;
+import com.sputnikpogrom.entities.Article;
 import com.sputnikpogrom.loaders.article.ArticleLoader;
 import com.sputnikpogrom.utils.ShareUtil;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by veinhorn on 15.7.15.
@@ -29,7 +35,8 @@ import butterknife.ButterKnife;
 public class ArticleFragment extends Fragment implements ObservableScrollViewCallbacks {
     @Bind(R.id.articleWebView) protected ObservableWebView articleWebView;
     @Bind(R.id.articleAdView) protected AdView adView;
-    private String articleUrl;
+    @Bind(R.id.fab) protected FloatingActionButton fab;
+    private Article article;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceS) {
@@ -40,9 +47,9 @@ public class ArticleFragment extends Fragment implements ObservableScrollViewCal
         AdRequest request = new AdRequest.Builder().build();
         adView.loadAd(request);
 
-        articleUrl = getArguments().getString("articleUrl");
+        article = fetchArticle();
         articleWebView.setScrollViewCallbacks(this);
-        new ArticleLoader(articleWebView).load(articleUrl);
+        new ArticleLoader(articleWebView).load(article.getArticleUrl());
 
         return view;
     }
@@ -58,7 +65,7 @@ public class ArticleFragment extends Fragment implements ObservableScrollViewCal
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.action_share:
-                ShareUtil.share(getActivity(), articleUrl);
+                ShareUtil.share(getActivity(), article.getArticleUrl());
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -86,5 +93,19 @@ public class ArticleFragment extends Fragment implements ObservableScrollViewCal
                 actionBar.show();
             }
         }
+    }
+
+    @OnClick(R.id.fab)
+    public void onClick() {
+        FavouriteDAO favouriteDAO = new FavouriteDAOImpl(getActivity());
+        favouriteDAO.insert(article);
+        Toast.makeText(getActivity(), "Article added to Favourite", Toast.LENGTH_SHORT).show();
+    }
+
+    private Article fetchArticle() {
+        Bundle bundle = getArguments();
+        return new Article(bundle.getString("articleTitle"),
+                           bundle.getString("articlePosterUrl"),
+                           bundle.getString("articleUrl"));
     }
 }

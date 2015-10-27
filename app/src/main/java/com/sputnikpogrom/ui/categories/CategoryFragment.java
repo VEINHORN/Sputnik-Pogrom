@@ -102,6 +102,8 @@ public class CategoryFragment extends Fragment implements ObservableScrollViewCa
         Fragment articleFragment = new ArticleFragment();
         Bundle bundle = new Bundle();
         Article article = articles.getArticle(position);
+        bundle.putString("articleTitle", article.getTitle());
+        bundle.putString("articlePosterUrl", article.getPosterUrl());
         bundle.putString("articleUrl", article.getArticleUrl());
         articleFragment.setArguments(bundle);
         ((NavigationDrawerActivity) getActivity()).setFragmentChild(articleFragment, article.getTitle());
