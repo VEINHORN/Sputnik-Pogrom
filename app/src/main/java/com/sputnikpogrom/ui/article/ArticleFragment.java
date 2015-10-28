@@ -24,7 +24,6 @@ import com.sputnikpogrom.db.dao.FavouriteDAOImpl;
 import com.sputnikpogrom.entities.Article;
 import com.sputnikpogrom.loaders.article.ArticleLoader;
 import com.sputnikpogrom.utils.ShareUtil;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
