@@ -14,6 +14,7 @@
 
     <!-- Navigation drawer string resources -->
     <string name="fragment_home_title">Home</string>
+    <string name="fragment_favourite">Favourite</string>
     <string name="fragment_new_articles_title">New articles</string>
 
     <string name="nav_drawer_categories">Categories</string>

@@ -22,6 +22,7 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
         setDrawerHeaderImage(R.drawable.nav_drawer_header);
 
         addSection(newSection(getString(R.string.fragment_home_title), getFragment(ArticlesFetcher.HOME)));
+        addSection(newSection(getString(R.string.fragment_favourite), getFavouriteFragment()));
         addSection(newSection(getString(R.string.fragment_new_articles_title), getNewArticlesFragment(ArticlesFetcher.HOME)));
 
         addSubheader(getString(R.string.nav_drawer_categories));
@@ -56,6 +57,12 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
     private Fragment getFragment(int categoryType) {
         Fragment fragment = new CategoryFragment();
         fragment.setArguments(getBundle(categoryType));
+        return fragment;
+    }
+
+    private Fragment getFavouriteFragment() {
+        Fragment fragment = new Fragment();
+
         return fragment;
     }
 
