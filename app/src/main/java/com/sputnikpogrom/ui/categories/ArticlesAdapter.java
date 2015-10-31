@@ -1,4 +1,4 @@
-package com.sputnikpogrom.ui.categories.adapters;
+package com.sputnikpogrom.ui.categories;
 
 import android.content.Context;
 import android.graphics.Bitmap;

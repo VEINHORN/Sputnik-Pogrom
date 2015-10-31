@@ -24,7 +24,6 @@ import com.sputnikpogrom.holders.PageNumberHolder;
 import com.sputnikpogrom.loaders.ArticlesLoader;
 import com.sputnikpogrom.ui.NavigationDrawerActivity;
 import com.sputnikpogrom.ui.article.ArticleFragment;
-import com.sputnikpogrom.ui.categories.adapters.ArticlesAdapter;
 import com.sputnikpogrom.utils.DialogsUtil;
 import com.sputnikpogrom.utils.NetworkUtil;
 

@@ -1,4 +1,4 @@
-package com.sputnikpogrom.ui.categories.newarticles;
+package com.sputnikpogrom.ui.newarticles;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -13,7 +13,7 @@ import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.sputnikpogrom.holders.PageNumberHolder;
 import com.sputnikpogrom.loaders.NewArticlesLoader;
 import com.sputnikpogrom.ui.categories.CategoryFragment;
-import com.sputnikpogrom.ui.categories.adapters.ArticlesAdapter;
+import com.sputnikpogrom.ui.categories.ArticlesAdapter;
 import com.sputnikpogrom.utils.DialogsUtil;
 import com.sputnikpogrom.utils.NetworkUtil;
 

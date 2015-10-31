@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import com.sputnikpogrom.R;
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
 import com.sputnikpogrom.ui.categories.CategoryFragment;
-import com.sputnikpogrom.ui.categories.newarticles.NewArticlesFragment;
+import com.sputnikpogrom.ui.newarticles.NewArticlesFragment;
 import com.sputnikpogrom.ui.settings.SettingsActivity;
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
 

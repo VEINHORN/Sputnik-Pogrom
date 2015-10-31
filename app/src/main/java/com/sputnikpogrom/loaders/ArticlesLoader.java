@@ -6,7 +6,7 @@ import android.util.Log;
 import com.sputnikpogrom.entities.Article;
 import com.sputnikpogrom.entities.containers.ArticlesContainer;
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
-import com.sputnikpogrom.ui.categories.adapters.ArticlesAdapter;
+import com.sputnikpogrom.ui.categories.ArticlesAdapter;
 import com.sputnikpogrom.utils.DialogsUtil;
 import org.jsoup.HttpStatusException;
 import java.io.IOException;
