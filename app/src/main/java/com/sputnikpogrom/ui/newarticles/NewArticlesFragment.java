@@ -44,10 +44,9 @@ public class NewArticlesFragment extends CategoryFragment {
             categoryType = getArguments().getInt("categoryType");
 
             new NewArticlesLoader(activity, articles, articlesAdapter).execute(categoryType, pageNumberHolder.getPageNumber());
-            return view;
         } else {
             DialogsUtil.showNoInternetConnectionDialog(activity);
-            return view;
         }
+        return view;
     }
 }

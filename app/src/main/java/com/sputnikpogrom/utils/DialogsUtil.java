@@ -44,4 +44,13 @@ public class DialogsUtil {
                 .positiveColor(Color.GRAY)
                 .show();
     }
+
+    public static MaterialDialog showNoArticlesDialog(Context context) {
+        return new MaterialDialog.Builder(context)
+                .title("No articles")
+                .content("Your favourite list is empty. Add some articles to it.")
+                .positiveText("OK")
+                .positiveColor(Color.GRAY)
+                .show();
+    }
 }

@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import com.sputnikpogrom.R;
 import com.sputnikpogrom.fetchers.ArticlesFetcher;
 import com.sputnikpogrom.ui.categories.CategoryFragment;
+import com.sputnikpogrom.ui.favourite.FavouriteFragment;
 import com.sputnikpogrom.ui.newarticles.NewArticlesFragment;
 import com.sputnikpogrom.ui.settings.SettingsActivity;
 import it.neokree.materialnavigationdrawer.MaterialNavigationDrawer;
@@ -61,8 +62,7 @@ public class NavigationDrawerActivity extends MaterialNavigationDrawer {
     }
 
     private Fragment getFavouriteFragment() {
-        Fragment fragment = new Fragment();
-
+        Fragment fragment = new FavouriteFragment();
         return fragment;
     }
 
