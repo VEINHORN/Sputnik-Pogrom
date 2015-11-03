@@ -17,6 +17,7 @@ import static com.sputnikpogrom.fetchers.ArticlesFetcher.NOT_FOUND;
  * Created by veinhorn on 2.7.15.
  */
 public class ArticlesLoader extends AsyncTask<Integer, Integer, ArticlesContainer> {
+    private static final String PAGE_NOT_FOUND = "Requested page wasn't found.";
     private Context context;
     private ArticlesContainer articles;
     private ArticlesAdapter articlesAdapter;
@@ -36,7 +37,7 @@ public class ArticlesLoader extends AsyncTask<Integer, Integer, ArticlesContaine
         } catch(HttpStatusException e) {
             if(e.getStatusCode() == NOT_FOUND) return new ArticlesContainer();
         } catch(IOException e) {
-            Log.e(getClass().getName(), e.getMessage());
+            if(e.getMessage() != null) Log.e(getClass().getName(), e.getMessage());
         }
         return articles == null ? null : new ArticlesContainer(articles);
     }
@@ -50,7 +51,7 @@ public class ArticlesLoader extends AsyncTask<Integer, Integer, ArticlesContaine
                 this.articles.addArticles(articles);
                 articlesAdapter.notifyDataSetChanged();
             } else {
-                Log.i(getClass().getName(), "Requested page wasn't found.");
+                Log.i(getClass().getName(), PAGE_NOT_FOUND);
             }
         }
     }
